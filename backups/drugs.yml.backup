@@ -1,0 +1,83 @@
+name: 药物指南
+title: 药物安全使用指南
+subtitle: '科学用药 | 安全第一'
+icon: /icons/medicine.png
+cover: /icons/medicine.png
+description: 常见药物的使用指南、注意事项及安全剂量说明
+leftbar:
+  - tree
+  - recent
+rightbar:
+  - toc
+comment_title: '如有问题或建议，欢迎在评论区交流讨论。'
+comments:
+  service: false
+base_dir: /drugs/
+tree:
+  '导论':
+    - introduction-to-overdose
+    - /
+    - index
+  '分类-根目录':
+    - ACL
+    - ADD
+    - AES
+    - AMs
+    - ARP
+    - ASP
+    - ATD
+    - BCF
+    - BPP
+    - BZD
+    - CDI
+    - CFI
+    - CLH
+    - compound
+    - DHCDI
+    - DMH
+    - DPD
+    - DPH
+    - DPX
+    - DXM
+    - EI
+    - EtOH
+    - GBP
+    - KTM
+    - LTG
+    - MGT
+    - MMT
+    - MOP
+    - NFP
+    - Opioids
+    - OZP
+    - PCT
+    - PMZ
+    - PPD
+    - PPF
+    - PR
+    - PVR
+    - QTP
+    - RPD
+    - RTL
+    - SPM
+    - SRIs
+    - TAN
+    - TEA
+    - THP
+    - TMD
+    - TPL
+    - TPM
+    - TTM
+    - TXT
+    - VPA
+    - ZD
+    - ZPC
+    - ZPD
+    - ZPO
+  '分类-DHCDI':
+    - DHCDI/OAR
+  '分类-DXM':
+    - DXM/HTCT5THP
+    - DXM/The_harm_of_dextromethorphan
+  '分类-MGT':
+    - MGT/OAR

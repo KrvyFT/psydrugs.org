@@ -1,14 +1,13 @@
 ---
-layout: page
 wiki: drugs
-title: 右美沙芬（DXM）
-description: 镇咳、解离
-categories: [药物]
-menu_id: drugs
-date: 2024-06-26
-updated: 2025-12-22
+title: 右美沙芬
+description: 解离、抗抑郁
+published: true
+date: 2024-06-26T14:36:09.595Z
+tags: 
+editor: markdown
+dateCreated: 2024-01-30T11:16:42.011Z
 ---
-
 # <font color=#FF5F3F> 右美沙芬</font>
 
 > 恭喜！2024.05.07，一个几乎从未在精神科露面的药物，现今已经跨越为[精二](/Others/20240507084000186)了！为我们的小美庆祝！阶级跨越！

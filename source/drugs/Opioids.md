@@ -1,14 +1,13 @@
 ---
-layout: page
 wiki: drugs
-title: 阿片类药物详解
+title: 阿片类药物
 description: 阿片类麻醉
-categories: [药物]
-menu_id: drugs
-date: 2024-05-21
-updated: 2025-12-22
+published: true
+date: 2024-05-21T13:55:09.081Z
+tags: 
+editor: markdown
+dateCreated: 2024-02-11T09:49:05.757Z
 ---
-
 # 阿片类药物
 
 > 最危险的阿片类药物，最恐怖的阿片类成瘾

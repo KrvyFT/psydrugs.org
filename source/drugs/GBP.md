@@ -1,14 +1,13 @@
 ---
-layout: page
 wiki: drugs
-title: 加巴喷丁（Gabapentin）
+title: 加巴喷丁
 description: 焦虑去除、GABA镇静
-categories: [药物]
-menu_id: drugs
-date: 2024-06-13
-updated: 2025-12-22
+published: true
+date: 2024-06-13T14:52:50.942Z
+tags: 
+editor: markdown
+dateCreated: 2024-04-28T03:35:31.860Z
 ---
-
 # 加巴喷丁
 
 **加巴喷丁(Gabapentin, PR)** 是抗癫痫药、神经止痛药、抗惊厥药，属于去焦虑剂。加巴喷丁本身就是一种酸，即1-(氨甲基)环己烷乙酸。滑雪衫

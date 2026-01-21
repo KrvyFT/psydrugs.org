@@ -2,6 +2,7 @@
 wiki: combination
 title: 药物联用安全指南
 menu_id: combination
+password: 123456
 ---
 
 ## 药物联用安全指导

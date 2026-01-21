@@ -41,22 +41,22 @@ menubar:
   items: # 可按照自己需求增加，符合以下格式即可
     - id: drugs
       theme: '#1BCDFC'
-      icon: <img src="/icons/medicine.png"/>
+      icon: 药物
       title: 药物
       url: /drugs/
     - id: combination
       theme: '#3DC550'
-      icon: <img src="/icons/combine.png"/>
+      icon: 联用
       title: 联用
       url: /combination/
     - id: reports
       theme: '#FA6400'
-      icon: <img src="/icons/report.png"/>
+      icon: 报告
       title: 报告
       url: /reports/
     - id: recovery
       theme: '#F44336'
-      icon: <img src="/icons/healing.png"/>
+      icon: 恢复
       title: 恢复
       url: /recovery/
     # id: 页面中高亮的 menu_id 

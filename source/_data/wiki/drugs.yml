@@ -18,16 +18,75 @@ tree:
     - introduction-to-overdose
     - /
     - index
-  '镇静安眠类':
-    - benzodiazepines-guide
-    - benzodiazepines-detailed
-    - gabapentin
-  '阿片类药物':
-    - opioid-safety-guide
-    - opioids-detailed
-  '抗抑郁类':
-    - ssri-antidepressants-guide
-    - serotonin-reuptake-inhibitors
-  '其他常用药物':
-    - paracetamol-guide
-    - dextromethorphan
+  '解离与麻醉':
+    - KTM
+    - DXM
+    - DXM/HTCT5THP
+    - DXM/The_harm_of_dextromethorphan
+    - ATD
+    - MMT
+    - TTM
+    - PPF
+  '阿片与镇痛':
+    - Opioids
+    - CDI
+    - DHCDI
+    - DHCDI/OAR
+    - MOP
+    - PPD
+    - DPX
+    - TMD
+    - PVR
+    - NFP
+  '镇静催眠 / 睡眠':
+    - BZD
+    - ZD
+    - ZPC
+    - ZPD
+    - ZPO
+    - CLH
+    - DPH
+    - THP
+    - PMZ
+  '抗精神病 / 情绪稳定':
+    - ARP
+    - ASP
+    - QTP
+    - OZP
+    - RPD
+    - VPA
+    - LTG
+    - PR
+    - GBP
+  '抗抑郁与注意力':
+    - SRIs
+    - TXT
+    - BPP
+    - RTL
+    - AMs
+    - CFI
+  '止吐 / 抗组胺 / 胃肠':
+    - AES
+    - DPD
+    - DMH
+    - DPH
+    - ACL
+    - CLH
+    - PCT
+    - TAN
+    - TEA
+  '补充剂与代谢调节':
+    - EI
+    - SPM
+    - MGT
+    - MGT/OAR
+    - TPL
+  '其他':
+    - compound
+    - EtOH
+    - BCF
+    - PMZ
+    - PCT
+    - TPM
+  '未分组':
+    - ADD

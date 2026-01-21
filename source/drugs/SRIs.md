@@ -1,14 +1,13 @@
 ---
-layout: page
 wiki: drugs
-title: 血清素再摄取抑制剂（SRIs）
+title: 血清素再摄取抑制剂
 description: 抗抑郁、（部分）抗焦虑
-categories: [药物]
-menu_id: drugs
-date: 2024-05-08
-updated: 2025-12-22
+published: true
+date: 2024-05-08T20:23:19.296Z
+tags: 
+editor: markdown
+dateCreated: 2024-03-31T03:06:52.527Z
 ---
-
 # 血清素再摄取抑制剂
 > 它们基本不能用于od，因为滥用下没有特殊的药效
 {.is-info}
