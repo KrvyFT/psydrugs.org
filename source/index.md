@@ -1,5 +1,5 @@
 ---
-title: overdose.wiki
+title: psydrugs.org
 date: 2025-12-22 00:00:00
 updated: 2025-12-22 00:00:00
 permalink: /
@@ -12,13 +12,13 @@ leftbar:
 ---
 
 <table><tr><td>
-<strong>overdose.wiki</strong>是免费且持续更新的<strong>参考</strong>od知识整合站点。为方便理解，取舍了大量内容，具有充分了解者可离开本站
+<strong>psydrugs.org</strong>是免费且持续更新的<strong>参考</strong>od知识整合站点。为方便理解，取舍了大量内容，具有充分了解者可离开本站
 
 </td></tr></table>
 
 ## 导论
 
-欢迎来到 overdose.wiki - 药物安全知识库。本站致力于提供科学、客观的药物安全信息，帮助您了解药物使用的风险与防护措施。
+欢迎来到 psydrugs.org - 药物安全知识库。本站致力于提供科学、客观的药物安全信息，帮助您了解药物使用的风险与防护措施。
 
 ### 网站结构
 

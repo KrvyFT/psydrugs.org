@@ -20,7 +20,7 @@ dateCreated: 2024-05-08T14:13:51.508Z
 - 拮抗受体：毒蕈碱乙酰胆碱/mAChR/M~1~
 
 #### 药物作用
-- **主要的副作用：[谵妄](/Effects/Delirium)、抗胆碱能综合征、精神病状、呼吸抑制**
+- **主要的副作用：[谵妄](/effects/Delirium)、抗胆碱能综合征、精神病状、呼吸抑制**
 - 主要的主作用：镇静
   
 #### 药代动力学 ^[[wikipedia](https://en.wikipedia.org/wiki/Pentoxyverine)]

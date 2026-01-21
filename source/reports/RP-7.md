@@ -15,7 +15,7 @@ wiki: reports
 
 报告者：超级后后后藤
 身高体重：175cm, 60kg
-有关药物：[右美沙芬](/Drugs/DXM)、[咖啡因](/Drugs/CFI)、[金刚烷胺](/Drugs/ATD)、[茶苯海明](/Drugs/DMH)、[复方甘草片](/Drugs/compound)、[氟伏沙明](/Drugs/SRIs)
+有关药物：[右美沙芬](/drugs/DXM)、[咖啡因](/drugs/CFI)、[金刚烷胺](/drugs/ATD)、[茶苯海明](/drugs/DMH)、[复方甘草片](/drugs/compound)、[氟伏沙明](/drugs/SRIs)
 删改了部分内容，以更方便阅读
 
 - 【方括号以内的内容，是后期写入的】

@@ -24,7 +24,7 @@ dateCreated: 2024-04-18T21:14:27.057Z
 #### 药物作用^[[psywiki](https://m.psychonautwiki.org/wiki/Piracetam)]~【有凑字数嫌疑】~
 - **主要的副作用：睡眠障碍**
 - **急性的副作用：肌肉痉挛、震颤**
-- 主要的主作用：运动机能亢进、认知感知强化、记忆力强化、梦境强化、性欲强化、[反解离](/Effects/Antidissociation)、反[谵妄](/Effects/Delirium)、焦虑抑制、抗ADHD、抗镰状细胞性贫血
+- 主要的主作用：运动机能亢进、认知感知强化、记忆力强化、梦境强化、性欲强化、[反解离](/effects/Antidissociation)、反[谵妄](/effects/Delirium)、焦虑抑制、抗ADHD、抗镰状细胞性贫血
 
 #### 药代动力学
 

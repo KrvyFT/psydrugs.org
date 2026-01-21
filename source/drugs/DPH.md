@@ -22,7 +22,7 @@ dateCreated: 2024-04-11T03:57:54.847Z
 - 阻滞通道：Na^+^
 
 #### 药物作用
-- **主要的副作用：[谵妄](/Effects/Delirium)、精神病状、记忆力丧失、<ruby>阿兹海默症<rt>老年痴呆</rt></ruby>、死亡、抗胆碱能综合征、呼吸抑制**
+- **主要的副作用：[谵妄](/effects/Delirium)、精神病状、记忆力丧失、<ruby>阿兹海默症<rt>老年痴呆</rt></ruby>、死亡、抗胆碱能综合征、呼吸抑制**
 - 主要的主作用：镇静
 
 #### 药代动力学^[[wikipedia](https://en.wikipedia.org/wiki/Diphenhydramine)]
@@ -56,7 +56,7 @@ dateCreated: 2024-04-11T03:57:54.847Z
   
 #### 剂量 ~【以60kg为标准】~
 
->别再靠近了！苯海拉明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?kw=%D5%BD%B5%D85&fr=ala0&tpl=5&dyTabStr=MCwyLDEsMyw2LDQsNSw3LDgsOQ%3D%3D)或者[这个](/zh/Drugs/DXM)
+>别再靠近了！苯海拉明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?kw=%D5%BD%B5%D85&fr=ala0&tpl=5&dyTabStr=MCwyLDEsMyw2LDQsNSw3LDgsOQ%3D%3D)或者[这个](/zh/drugs/DXM)
 {.is-danger}
 
 医学剂量：一次一片，每日两次
