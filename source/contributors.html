@@ -54,60 +54,60 @@ comments: false
 </div>
 
 <style>
-.contributors-container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-}
-
-.contributors-intro {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 1.1rem;
-  color: var(--text-highlight);
-}
-
-.contributor-section {
-  margin-bottom: 3rem;
-}
-
-.contributor-section h2 {
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--block-border);
-  color: var(--text-highlight);
-}
-
-.contributor-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-}
-
-.contributor-item {
-  padding: 1rem;
-  background: var(--card);
-  border-radius: 8px;
-  text-align: center;
-  border: 1px solid var(--block-border);
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.contributor-item:hover {
-  background: var(--button-hover);
-  border-color: var(--text-highlight);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-  .contributor-list {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-
   .contributors-container {
-    padding: 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
   }
-}
+
+  .contributors-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    color: var(--text-highlight);
+  }
+
+  .contributor-section {
+    margin-bottom: 3rem;
+  }
+
+  .contributor-section h2 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--block-border);
+    color: var(--text-highlight);
+  }
+
+  .contributor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .contributor-item {
+    padding: 1rem;
+    background: var(--card);
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--block-border);
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .contributor-item:hover {
+    background: var(--button-hover);
+    border-color: var(--text-highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .contributor-list {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .contributors-container {
+      padding: 1rem;
+    }
+  }
 </style>
