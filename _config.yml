@@ -9,7 +9,7 @@ description: 精神药物安全使用指南、药物相互作用、过量处理�
 keywords: 精神药物, 药物安全, 药物过量, 紧急处理, 减害措施, 药物相互作用, 阿片类, 苯二氮卓类, 右美沙芬, 抗抑郁药, 康复指南, 用户报告, harm reduction, psychoactive drugs
 author: Krvy, 
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -107,3 +107,11 @@ deploy:
 ##
 encrypt:
     enable: true
+
+# 致谢
+acknowledgments: 
+  - "感谢以下所有为本项目做出贡献的人员。你们的努力使这个项目能够为更多人提供帮助。"
+  - "编辑组：天晓，叶子，krvy，Akinoyo，后藤，彻子，xialingXD"
+  - "测试组：Rinko, 天晓, krvy，Akinoyo"
+  - "评估审核分析：Misaka, 彻子，柚璘"
+  - "技术：krvy，xialingXD"
