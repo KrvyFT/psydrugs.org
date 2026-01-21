@@ -26,7 +26,7 @@ dateCreated: 2024-04-21T12:40:00.455Z
 #### 作用
 - **主要的副作用：异常时间勃起、虚弱**【缺】^[[baidu](https://health.baidu.com/m/detail/ar_12348978522701237380)]
 - **急性的副作用：过敏、心跳异常、脱水、恶心、疲劳**【缺】^[[baidu](https://health.baidu.com/m/detail/ar_12348978522701237380)]
-- 主要的主作用：抗ADHD、抗抑郁、[解离](/effects/Dissociation)、非常轻微的[阿片类麻醉](/drugs/Opioids)
+- 主要的主作用：抗ADHD、抗抑郁、[解离](/effects/Dissociation)、非常轻微的[阿片类麻醉](/zh/drugs/Opioids)
 
 #### 药代动力学^[[wikipedia](https://en.wikipedia.org/wiki/Atomoxetine)。代谢部分跳步]
 

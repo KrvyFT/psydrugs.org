@@ -56,7 +56,7 @@ dateCreated: 2024-04-11T03:57:54.847Z
   
 #### 剂量 ~【以60kg为标准】~
 
->别再靠近了！苯海拉明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?kw=%D5%BD%B5%D85&fr=ala0&tpl=5&dyTabStr=MCwyLDEsMyw2LDQsNSw3LDgsOQ%3D%3D)或者[这个](/drugs/DXM)
+>别再靠近了！苯海拉明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?kw=%D5%BD%B5%D85&fr=ala0&tpl=5&dyTabStr=MCwyLDEsMyw2LDQsNSw3LDgsOQ%3D%3D)或者[这个](/zh/drugs/DXM)
 {.is-danger}
 
 医学剂量：一次一片，每日两次

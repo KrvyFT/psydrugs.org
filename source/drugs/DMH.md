@@ -13,10 +13,10 @@ dateCreated: 2024-02-17T09:29:41.735Z
 >茶苯海明基本不能用于od，且作为谵妄剂具有高毒性
 {.is-danger}
 
-**茶苯海明(Dimenhydrinate, DMH)** 是抗晕动病药、抗放射病药，属于谵妄剂，为复方药物。茶苯海明本身整合了8-氨茶碱，即[苯海拉明](/drugs/DPH)8-氨茶碱。**基本不能od**
+**茶苯海明(Dimenhydrinate, DMH)** 是抗晕动病药、抗放射病药，属于谵妄剂，为复方药物。茶苯海明本身整合了8-氨茶碱，即[苯海拉明](/zh/drugs/DPH)8-氨茶碱。**基本不能od**
 ## 药理作用
 #### 作用机理 ^[[wikipedia](https://en.wikipedia.org/wiki/Diphenhydramine)]
-[苯海拉明](/drugs/DPH)部分——
+[苯海拉明](/zh/drugs/DPH)部分——
 - 反激受体：组胺/H~1~
 - 拮抗受体：毒蕈碱乙酰胆碱/mAChR/M~1~, M~2~, M~3~, M~4~, M~5~
 - 阻滞通道：Na^+^
@@ -48,7 +48,7 @@ dateCreated: 2024-02-17T09:29:41.735Z
 
 #### 剂量 ~【以60kg为标准】~
 
->别再靠近了！茶苯海明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?ie=utf-8&kw=insurgencysandstorm)或者[这个](/drugs/DXM)
+>别再靠近了！茶苯海明根本不好玩！笔者推荐你玩[这个](https://tieba.baidu.com/f?ie=utf-8&kw=insurgencysandstorm)或者[这个](/zh/drugs/DXM)
 {.is-danger}
 
 医学剂量：25mg~50mg，每日两次

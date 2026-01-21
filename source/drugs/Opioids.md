@@ -90,7 +90,7 @@ dateCreated: 2024-02-11T09:49:05.757Z
 - [曲马多](/drugs/TMD)　　　——(1/10)x【多了SSRI与SNRI】
 - [可待因](/drugs/CDI)　　　——(1/10)x
 - 杜冷丁　　　——(1/10)x【起效快效时短】
-- [右美沙芬](/drugs/DXM)　　——(1/60)x【几乎没有阿片类药效】
+- [右美沙芬](/zh/drugs/DXM)　　——(1/60)x【几乎没有阿片类药效】
 - 纳洛酮　　　——(-1)x【反制阿片类药效】
 
 ## 海洛因^[[百度](https://baike.baidu.com/item/%E6%B5%B7%E6%B4%9B%E5%9B%A0/544824?fr=ge_ala)]
