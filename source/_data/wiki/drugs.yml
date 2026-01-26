@@ -14,7 +14,7 @@ comments:
   service: false
 base_dir: /drugs/
 tree:
-  '导论':
+  '绪论':
     - introduction-to-overdose
     - /
     - index
@@ -62,6 +62,7 @@ tree:
   '抗抑郁与注意力':
     - antidepressants/血清素再摄取抑制剂
     - antidepressants/托莫西汀
+    - antidepressants/吗氯贝胺
     - antidepressants/安非他酮
     - antidepressants/哌醋甲酯
     - antidepressants/苯丙胺类药物
