@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.095131Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.095180Z
+updated: 2026-01-25T23:34:31.095180Z
 ---
 
 # 4-HO-DET

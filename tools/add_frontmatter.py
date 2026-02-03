@@ -33,7 +33,7 @@ published: true
 date: {datetime.now().isoformat()}Z
 tags: 
 editor: markdown
-dateCreated: {datetime.now().isoformat()}Z
+updated: {datetime.now().isoformat()}Z
 ---
 
 """

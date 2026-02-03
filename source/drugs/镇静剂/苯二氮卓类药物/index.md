@@ -6,7 +6,7 @@ published: true
 date: 2024-05-13T13:15:49.311Z
 tags: 
 editor: markdown
-dateCreated: 2024-04-11T23:48:14.546Z
+updated: 2024-04-11T23:48:14.546Z
 ---
 # 苯二氮卓类药物
 **苯二氮卓类药物(BenZodiazepine Drugs, BZD)** 是以苯二氮䓬为骨架而化学合成的药物，并具有相似的GABA能镇静作用。不同苯二氮卓类药物之间，作用机理差异不大，有时可视作只有半衰期、达峰浓度时间有差异

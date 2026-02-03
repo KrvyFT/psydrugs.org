@@ -15,11 +15,11 @@ def convert_frontmatter(content, filename):
     # 解析字段
     title = re.search(r'title:\s*(.+)', frontmatter)
     date = re.search(r'date:\s*(.+)', frontmatter)
-    date_created = re.search(r'dateCreated:\s*(.+)', frontmatter)
+    date_created = re.search(r'updated:\s*(.+)', frontmatter)
     
     title_text = title.group(1).strip() if title else filename.replace('.md', '')
     
-    # 使用 dateCreated 作为 date，date 作为 updated
+    # 使用 updated 作为 date，date 作为 updated
     if date_created:
         date_str = date_created.group(1).strip()
         date_obj = datetime.fromisoformat(date_str.replace('Z', '+00:00'))

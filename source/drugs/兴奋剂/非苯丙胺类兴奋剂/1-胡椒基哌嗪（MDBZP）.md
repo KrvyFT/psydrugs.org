@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.088492Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.088557Z
+updated: 2026-01-25T23:34:31.088557Z
 ---
 
 # 1-胡椒基哌嗪（MDBZP）

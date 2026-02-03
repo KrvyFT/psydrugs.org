@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.098426Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.098486Z
+updated: 2026-01-25T23:34:31.098486Z
 ---
 
 # D2PM（二苯基脯氨醇）

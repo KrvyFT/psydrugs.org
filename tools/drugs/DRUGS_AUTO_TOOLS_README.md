@@ -151,7 +151,7 @@ tags:
   - 标签1
   - 标签2
 editor: markdown
-dateCreated: 2024-01-30T11:16:42.000Z
+updated: 2024-01-30T11:16:42.000Z
 ---
 
 # 药物名称

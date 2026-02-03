@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.109969Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.110035Z
+updated: 2026-01-25T23:34:31.110035Z
 ---
 
 # 异丙斯卡林（Isoproscaline） - 苯乙胺类化合物科普

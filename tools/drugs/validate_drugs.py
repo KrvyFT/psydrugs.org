@@ -41,7 +41,7 @@ published: true
 date: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S.000Z')}
 tags: 
 editor: markdown
-dateCreated: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S.000Z')}
+updated: {datetime.now().strftime('%Y-%m-%dT%H:%M:%S.000Z')}
 ---
 
 """

@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.086500Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.086535Z
+updated: 2026-01-25T23:34:31.086535Z
 ---
 
 # 1-(3-甲基苯甲基)哌嗪（3-Me-BZP）

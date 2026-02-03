@@ -6,7 +6,7 @@ published: true
 date: 2024-05-16T19:21:06.386Z
 tags: 
 editor: markdown
-dateCreated: 2024-05-13T13:24:14.619Z
+updated: 2024-05-13T13:24:14.619Z
 ---
 
 # 谵妄

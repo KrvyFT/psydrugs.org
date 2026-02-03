@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.107702Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.107746Z
+updated: 2026-01-25T23:34:31.107746Z
 ---
 
 # 卡立普多（Carisoprodol） - 肌肉松弛剂科普

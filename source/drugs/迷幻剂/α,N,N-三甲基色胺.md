@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.102573Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.102613Z
+updated: 2026-01-25T23:34:31.102613Z
 ---
 
 # α,N,N-三甲基色胺

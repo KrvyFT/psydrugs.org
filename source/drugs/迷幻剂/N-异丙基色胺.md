@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.101710Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.101747Z
+updated: 2026-01-25T23:34:31.101747Z
 ---
 
 # N-异丙基色胺

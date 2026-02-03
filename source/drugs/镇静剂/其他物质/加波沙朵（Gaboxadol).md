@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.106890Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.106906Z
+updated: 2026-01-25T23:34:31.106906Z
 ---
 
 # 加波沙朵（Gaboxadol） - GABA类化合物科普

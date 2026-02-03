@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.090263Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.090306Z
+updated: 2026-01-25T23:34:31.090306Z
 ---
 
 # 2-二苯甲基吡咯烷（Desoxy-D2PM）

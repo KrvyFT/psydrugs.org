@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.103479Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.103521Z
+updated: 2026-01-25T23:34:31.103521Z
 ---
 
 # 乙基麦司卡林（Escaline） - 合成迷幻物质科普

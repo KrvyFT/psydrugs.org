@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.100191Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.100230Z
+updated: 2026-01-25T23:34:31.100230Z
 ---
 
 # N-乙基-1-(4-甲氧基苯基)丙-2-胺 (PMEA)

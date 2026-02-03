@@ -6,7 +6,7 @@ published: true
 date: 2026-01-25T23:34:31.091382Z
 tags: 
 editor: markdown
-dateCreated: 2026-01-25T23:34:31.091422Z
+updated: 2026-01-25T23:34:31.091422Z
 ---
 
 # 4-AcO-MET
