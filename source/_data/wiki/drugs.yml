@@ -6,12 +6,11 @@ cover: /icons/medicine.png
 description: 常见药物的使用指南、注意事项及安全剂量说明
 leftbar:
   - tree
-  - recent
 rightbar:
   - toc
 comment_title: '如有问题或建议，欢迎在评论区交流讨论。'
 comments:
-  service: false
+  service: true
 base_dir: /drugs/
 tree:
   '绪论':
@@ -26,5 +25,5 @@ tree:
     - 常见od药物/二氢可待因
     - 常见od药物/金刚烷胺
   '安眠药':
-    - 安眠药/本二氮卓类药物
-    - 安眠药/Z类药物
+    - 安眠药/苯二氮卓类药物
+    - 安眠药/Z药物

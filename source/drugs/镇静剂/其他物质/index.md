@@ -14,8 +14,8 @@ tags:
 
 - [1,4-丁二醇](/drugs/镇静剂/其他物质/1,4-丁二醇)
 - [乙醇](/drugs/镇静剂/其他物质/乙醇)
-- [加波沙朵（Gaboxadol)](/drugs/镇静剂/其他物质/加波沙朵（Gaboxadol))
-- [卡立普多（Carisoprodol)](/drugs/镇静剂/其他物质/卡立普多（Carisoprodol))
+- [加波沙朵（Gaboxadol)](/drugs/镇静剂/其他物质/加波沙朵（Gaboxadol)
+- [卡立普多（Carisoprodol)](/drugs/镇静剂/其他物质/卡立普多（Carisoprodol)
 - [噻奈普汀](/drugs/镇静剂/其他物质/噻奈普汀)
 - [大麻二酚](/drugs/镇静剂/其他物质/大麻二酚)
 - [甲溴喹酮](/drugs/镇静剂/其他物质/甲溴喹酮)
