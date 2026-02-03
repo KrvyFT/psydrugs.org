@@ -225,7 +225,7 @@ article:
   related_posts:
     enable: false
     max_count: 5
-  license: '本站内容（文章、报告、图片等）采用 [署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans) 协议；站点代码遵循 CC BY-SA 4.0（见项目根目录 LICENSE）。'
+  license: '本站内容（文章、报告、图片等）采用 [署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans) 协议；站点代码遵循 GPL-2.0（见项目根目录 LICENSE）。'
 
 search:
   service: local_search # local_search, algolia_search, todo...
