@@ -1,6 +1,6 @@
 name: 过量报告
 title: 药物过量应急报告
-subtitle: '及时救治 | 挽救生命'
+subtitle: "及时救治 | 挽救生命"
 icon: /icons/report.png
 cover: /icons/report.png
 description: 紧急情况处理方法、真实案例及经验教训
@@ -9,14 +9,14 @@ leftbar:
   - recent
 rightbar:
   - toc
-comment_title: '如有问题或建议，欢迎在评论区交流讨论。'
+comment_title: "如有问题或建议，欢迎在评论区交流讨论。"
 comments:
   service: false
 base_dir: /reports/
 tree:
-  '报告总览':
+  "报告总览":
     - index
-  'psydrugs 报告':
+  "psydrugs 报告":
     - pdw-reports/index
     - pdw-reports/RP-1
     - pdw-reports/RP-2
@@ -31,7 +31,8 @@ tree:
     - pdw-reports/RP-11
     - pdw-reports/RP-12
     - pdw-reports/RP-13
-  'overdose wiki 报告':
+    - pdw-reports/RP-14
+  "overdose wiki 报告":
     - odw-reports/index
     - odw-reports/RP-0
     - odw-reports/RP-1
