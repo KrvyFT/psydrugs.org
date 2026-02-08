@@ -34,9 +34,9 @@ structured_data:
 ######## Sidebar ########
 # 左上角显示的 logo 区域，包含图标、大标题、副标题
 logo:
-  avatar: '[ /icons/favicon.png](https://psydrugs.org)' # you can set avatar link in _config.yml or '[https://xxx.png](/about/)'
-  title: '[{config.title}](https://psydrugs.org)' # you can set html tag like: '[<img no-lazy height="32px" src="xxx"/>](/)'
-  subtitle: '{config.subtitle}' # '文字1 | 文字2' (鼠标放上去会切换到文字2)
+  avatar: "[ /icons/favicon.png](https://psydrugs.org)" # you can set avatar link in _config.yml or '[https://xxx.png](/about/)'
+  title: "[{config.title}](https://psydrugs.org)" # you can set html tag like: '[<img no-lazy height="32px" src="xxx"/>](/)'
+  subtitle: "{config.subtitle}" # '文字1 | 文字2' (鼠标放上去会切换到文字2)
 
 # 侧边栏主功能导航菜单
 menubar:
@@ -668,7 +668,7 @@ plugins:
     js: https://unpkg.com/heti@0.9/umd/heti-addon.min.js
 
 style:
-  prefers_theme: light # auto / light / dark
+  prefers_theme: auto # auto / light / dark
   smooth_scroll: false # true / false 开启时如果目录过长可能无法准确定位
   font-size:
     root: 16px # 改这个会影响全局所有文字的字号
