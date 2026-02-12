@@ -388,8 +388,6 @@ footer:
     #     - '[xxx](/)'
   content: | # 支持 Markdown 格式
     <center>
-    </br>
-    </br>
     <script type="text/javascript">
     function show_runtime() {
         window.setTimeout("show_runtime()", 1000);
@@ -410,7 +408,7 @@ footer:
     </script>
     <span id="runtime_span"> </span>
     </br>
-    本站内容采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans" target="_blank">署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)</a> 协议；站点代码遵循 CC BY-SA 4.0（见项目根目录 LICENSE）。
+    本站内容采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans" target="_blank">署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)</a> 协议；站点代码遵循 MIT（见项目根目录 LICENSE）。
 
 ######## Tag Plugins ########
 tag_plugins:
