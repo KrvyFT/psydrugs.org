@@ -8,6 +8,11 @@ menu_id: recovery
 
 本栏目提供恢复期的护理指南和健康管理建议：
 
+
+### 恢复介绍-什么是恢复？
+
+ - [恢复概述](source\recovery\summarize.md) - 了解恢复本身的目的
+
 ### 恢复指导
 
 - [恢复期护理与注意事项](/recovery/recovery-care-guide/) - 基础护理知识
@@ -21,3 +26,9 @@ menu_id: recovery
 > - 🧠 心理健康：重视心理支持
 > - 👩‍⚕️ 定期检查：监测健康状况
 > - 🌱 生活方式：建立健康习惯
+
+## 相关知识
+
+ - [生理副作用](source\recovery\physiology-side-effect.md)
+ - [急性精神副作用](source\recovery\acute-psychology-side-effect.md)
+ - [慢性精神副作用](source\recovery\chronically-psychology-side-effect.md)
