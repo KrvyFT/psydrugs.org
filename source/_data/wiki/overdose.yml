@@ -31,4 +31,4 @@ tree:
     - reports/survivor-stories
   '恢复护理':
     - recovery/recovery-care-guide
-    - recovery/comprehensive-recovery-plan
+    - recovery/new_index.md
