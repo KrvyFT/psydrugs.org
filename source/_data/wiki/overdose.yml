@@ -29,6 +29,5 @@ tree:
   '紧急处理':
     - reports/emergency-overdose-treatment
     - reports/survivor-stories
-  '恢复护理':
-    - recovery/recovery-care-guide
-    - recovery/new_index.md
+  '恢复管理':
+    - source/recovery/new_index.md
