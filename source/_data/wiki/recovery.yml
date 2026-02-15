@@ -14,7 +14,14 @@ comments:
   service: false
 base_dir: /recovery/
 tree:
-  - index
-  - acute-psychology-side-effect
-  - chronically-psychology-side-effect
-  - physiology-side-effect
+  "恢复总览":
+    - index
+    - 恢复概述
+  "副作用介绍":
+    - acute_psychology_side_effect
+    - chronically_psychology_side_effect
+    - physiology_side_effect
+  "恢复方案":
+    - dxm_recovery
+    - pr_recovery
+    - amt_recovery
