@@ -4,7 +4,7 @@ title: Z药物
 description: 镇静、安眠
 published: true
 date: 2024-04-18T20:20:16.144Z
-tags: 
+tags: [镇静, 安眠]
 editor: markdown
 updated: 2026-02-04T00:00:00.000Z
 ---

@@ -4,7 +4,7 @@ title: 4-AcO-MET
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.091382Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.091422Z
 ---

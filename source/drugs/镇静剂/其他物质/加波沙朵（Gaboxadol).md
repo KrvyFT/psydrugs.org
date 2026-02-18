@@ -4,7 +4,7 @@ title: 加波沙朵（Gaboxadol） - GABA类化合物科普
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.106890Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.106906Z
 ---

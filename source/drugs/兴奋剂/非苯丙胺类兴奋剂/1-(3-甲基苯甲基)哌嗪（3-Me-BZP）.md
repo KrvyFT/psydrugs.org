@@ -4,7 +4,7 @@ title: 1-(3-甲基苯甲基)哌嗪（3-Me-BZP）
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.086500Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.086535Z
 ---

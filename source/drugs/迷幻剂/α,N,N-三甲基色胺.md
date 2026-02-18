@@ -4,7 +4,7 @@ title: α,N,N-三甲基色胺
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.102573Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.102613Z
 ---

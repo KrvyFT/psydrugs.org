@@ -4,7 +4,7 @@ title: 1-胡椒基哌嗪（MDBZP）
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.088492Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.088557Z
 ---

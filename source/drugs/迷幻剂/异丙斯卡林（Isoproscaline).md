@@ -4,7 +4,7 @@ title: 异丙斯卡林（Isoproscaline） - 苯乙胺类化合物科普
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.109969Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.110035Z
 ---

@@ -4,7 +4,7 @@ title: 2-二苯甲基吡咯烷（Desoxy-D2PM）
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.090263Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.090306Z
 ---

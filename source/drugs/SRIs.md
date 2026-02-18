@@ -3,7 +3,7 @@ title: 血清素再摄取抑制剂
 description: 抗抑郁、（部分）抗焦虑
 published: true
 date: 2024-05-08T20:23:19.296Z
-tags: 
+tags: [抗抑郁, （部分）抗焦虑]
 editor: markdown
 dateCreated: 2024-03-31T03:06:52.527Z
 ---

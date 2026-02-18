@@ -4,7 +4,7 @@ title: 卡立普多（Carisoprodol） - 肌肉松弛剂科普
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.107702Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.107746Z
 ---

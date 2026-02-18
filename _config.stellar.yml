@@ -113,7 +113,7 @@ site_tree:
   index_wiki:
     base_dir: / # 只影响自动生成的页面路径
     menu_id: wiki # 未在 front-matter 中指定 menu_id 时，layout 为 wiki 的页面默认使用这里配置的 menu_id
-    leftbar: related # for wiki
+    leftbar: related, recent # for wiki
     rightbar:
     nav_tabs:
       "处方生成器": /prescription-generator/

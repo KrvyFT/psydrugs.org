@@ -4,7 +4,7 @@ title: N-乙基-1-(4-甲氧基苯基)丙-2-胺(PMEA)
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.100191Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.100230Z
 ---

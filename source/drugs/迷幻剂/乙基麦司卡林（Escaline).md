@@ -4,7 +4,7 @@ title: 乙基麦司卡林（Escaline） - 合成迷幻物质科普
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.103479Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.103521Z
 ---

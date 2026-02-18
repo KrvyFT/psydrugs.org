@@ -4,7 +4,7 @@ title: D2PM（二苯基脯氨醇）
 description: 化学物质
 published: true
 date: 2026-01-25T23:34:31.098426Z
-tags: 
+tags: [化学物质]
 editor: markdown
 updated: 2026-01-25T23:34:31.098486Z
 ---
