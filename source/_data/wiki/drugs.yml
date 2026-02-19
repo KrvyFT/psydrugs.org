@@ -1,6 +1,6 @@
 name: 药物指南
 title: 药物安全使用指南
-subtitle: '科学用药 | 安全第一'
+subtitle: "科学用药 | 安全第一"
 icon: /icons/medicine.png
 cover: /icons/medicine.png
 description: 常见药物的使用指南、注意事项及安全剂量说明
@@ -8,21 +8,32 @@ leftbar:
   - tree
 rightbar:
   - toc
-comment_title: '如有问题或建议，欢迎在评论区交流讨论。'
+comment_title: "如有问题或建议，欢迎在评论区交流讨论。"
 comments:
   service: true
 base_dir: /drugs/
 tree:
-  '绪论':
+  "绪论":
     - /
     - index
     - 索引
     - 药物作用
-  '常见od药物':
+  "常见od药物":
     - 常见od药物/右美沙芬_愈美片
     - 常见od药物/普瑞巴林
     - 常见od药物/二氢可待因
     - 常见od药物/金刚烷胺
-  '安眠药':
-    - 安眠药/苯二氮卓类药物
-    - 安眠药/Z药物
+  "安眠药":
+    - 镇静剂/苯二氮卓类药物/苯二氮卓类药物
+    - 镇静剂/Z类药物/index
+  "兴奋剂":
+    - 兴奋剂/index
+    - 兴奋剂/苯丙胺类兴奋剂/index
+    - 兴奋剂/非苯丙胺类兴奋剂/index
+  "阿片类药物":
+    - 止痛药/阿片类药物/阿片类药物
+    - 止痛药/阿片类药物/吗啡
+    - 止痛药/阿片类药物/可待因
+    - 止痛药/阿片类药物/曲马多
+    - 止痛药/阿片类药物/芬太尼
+    - 止痛药/阿片类药物/二氢可待因
