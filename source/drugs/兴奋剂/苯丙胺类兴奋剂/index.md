@@ -1,4 +1,5 @@
 ---
+wiki: drugs
 title: 苯丙胺类兴奋剂
 date: 2026-02-01
 categories:
