@@ -7,188 +7,601 @@ updated: 2025-12-22
 comments: false
 ---
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <style>
-  .prescription-form {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: var(--card);
-    border-radius: 16px;
-  }
-
-  .form-section {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px dashed var(--block-border);
-  }
-
-  .form-section:last-child {
-    border-bottom: none;
-  }
-
-  .form-section h3 {
-    margin-bottom: 1rem;
-    color: var(--text-p0);
-    font-size: 1.2rem;
-  }
-
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--text-p0);
-    font-size: 0.95rem;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--block-border);
-    border-radius: 8px;
-    background: var(--block);
-    color: var(--text-p0);
-    font-size: 1rem;
-  }
-
-  .form-group textarea {
-    min-height: 120px;
-    resize: vertical;
-    font-family: inherit;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .form-row-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .btn-generate {
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .btn-generate:hover {
-    transform: translateY(-2px);
-  }
-
-  .btn-generate:active {
-    transform: translateY(0);
-  }
-
-  .result-container {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: var(--block);
-    border-radius: 12px;
-    display: none;
-  }
-
-  .result-container.show {
-    display: block;
-  }
-
   .warning-box {
     padding: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     background: rgba(255, 152, 0, 0.1);
     border-left: 4px solid #ff9800;
     border-radius: 4px;
   }
 
-  .prescription-preview {
-    background: white;
-    color: black;
-    padding: 1.5rem;
-    border: 2px solid #333;
-    border-radius: 4px;
-    font-family: 'SimSun', 'Microsoft YaHei', serif;
-    font-size: 12px;
-    line-height: 1.6;
-    /* A5 尺寸比例: 148mm x 210mm */
-    width: 100%;
-    max-width: 592px;
-    min-height: 840px;
+  .pg-wrap {
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--block-border);
+  }
+
+  .pg-wrap * {
+    box-sizing: border-box;
+  }
+
+  .pg-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .paper-shell {
+    background: var(--block);
+    border: 1px solid var(--block-border);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow: auto;
+  }
+
+  .paper {
+    width: 210mm;
+    height: 148mm;
+    background: #fff;
+    color: #000;
+    padding: 5mm 10mm;
+    position: relative;
     margin: 0 auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: "SimSun", "Songti SC", serif;
+  }
+
+  .controls {
+    background: var(--block);
+    border: 1px solid var(--block-border);
+    border-radius: 12px;
+    padding: 0.9rem;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    font-size: 14px;
+  }
+
+  .controls-header {
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--block-border);
+    color: var(--text-p0);
+    cursor: move;
+    user-select: none;
+  }
+
+  .control-group {
+    margin-bottom: 12px;
+    border-bottom: 1px dashed var(--block-border);
+    padding-bottom: 10px;
+  }
+
+  .control-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-p0);
+    font-weight: 600;
+  }
+
+  .control-group input[type="text"] {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--block-border);
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--text-p0);
+  }
+
+  .control-group input[type="range"] {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .btn-green {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    margin-top: 0;
+  }
+
+  .btn-blue {
+    background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+  }
+
+  .btn-red {
+    background: linear-gradient(135deg, #cb2d3e 0%, #ef473a 100%);
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    color: var(--text-p2);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .barcode-wrapper {
+    position: absolute;
+    top: 5mm;
+    left: 10mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 20;
+    background: #fff;
+    padding: 2px;
+    border: 1px dashed transparent;
+    transition: border 0.2s;
+  }
+
+  .barcode-wrapper:hover {
+    border-color: #ccc;
+  }
+
+  .barcode-bars {
+    display: flex;
+    height: 30px;
+    align-items: flex-start;
+  }
+
+  .bar {
+    background-color: #000;
+    display: inline-block;
+    height: 100%;
+  }
+
+  .difang-box {
+    position: absolute;
+    top: 5mm;
+    right: 2mm;
+    border: 1px solid #000;
+    padding: 2px 10px;
+    font-size: 16px;
+    letter-spacing: 5px;
+    z-index: 20;
+  }
+
+  .header-section {
+    margin-bottom: 2px;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .title-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .hospital-input {
+    grid-column: 2;
+    font-size: 22px;
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 350px;
+    font-family: inherit;
+    background: transparent;
+    letter-spacing: 1px;
+  }
+
+  .doc-type {
+    grid-column: 3;
+    justify-self: start;
+    margin-left: 40px;
+    font-size: 22px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .grid-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .grid-left {
+    justify-self: start;
+  }
+
+  .grid-center {
+    justify-self: center;
+    text-align: center;
+  }
+
+  .grid-right {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .sub-input {
+    border: none;
+    outline: none;
+    text-align: left;
+    font-family: inherit;
+    font-size: 13px;
+    background: transparent;
+    min-width: 60px;
+    padding-left: 5px;
+  }
+
+  .info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+    font-size: 16px;
+    border-bottom: 2px solid #000;
+  }
+
+  .ib-left,
+  .ib-center,
+  .ib-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .ib-left {
+    gap: 20px;
+    width: 30%;
+  }
+
+  .ib-center {
+    justify-content: center;
+    width: 30%;
+  }
+
+  .ib-right {
+    width: 40%;
+    justify-content: flex-end;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .data-input {
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    outline: none;
+    padding-left: 2px;
+    background: transparent;
+    min-width: 40px;
+    font-size: 16px;
+  }
+
+  .main-table-container {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    border: 2px solid #000;
+    border-top: none;
+    position: relative;
+    margin-bottom: 5px;
+  }
+
+  .vertical-text {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 13px;
+    letter-spacing: 4px;
+    font-weight: bold;
+  }
+
+  .left-col {
+    width: 25%;
+    border-right: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .diag-wrapper {
+    padding: 5px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .diag-label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .diag-content {
+    flex-grow: 1;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.5;
+    background: transparent;
+  }
+
+  .note-section {
+    border-top: 1px solid #000;
+    padding: 15px 5px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  .right-col {
+    width: 75%;
+    padding: 5px 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rp-symbol {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 48px;
+    font-family: "Times New Roman", serif;
+  }
+
+  .text-content {
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.8;
+    padding-left: 10px;
+    padding-top: 60px;
+    background: transparent;
+  }
+
+  .rx-footer-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 5px;
+    padding-top: 5px;
+    font-size: 14px;
+  }
+
+  .rx-sign-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .rx-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    outline: none;
+    font-family: "Kaishu", "SimSun", serif;
+    background: transparent;
+    width: 80px;
+    margin-left: 5px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .sign-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 60px;
+    text-align: center;
+    outline: none;
+    font-family: "Kaishu", "SimSun", serif;
+    background: transparent;
+  }
+
+  .seal-wrapper {
+    position: absolute;
+    cursor: grab;
+    z-index: 100;
+    transition: outline 0.1s;
+  }
+
+  .seal-wrapper:active {
+    cursor: grabbing;
+  }
+
+  .seal-wrapper.is-selected {
+    outline: 2px dashed #007bff;
+    outline-offset: 5px;
+    z-index: 101;
+  }
+
+  .seal-body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: #d90000;
+    mix-blend-mode: multiply;
+  }
+
+  .seal-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .noise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: normal;
+    opacity: 0.6;
+  }
+
+  .seal-circle {
+    width: 170px;
+    height: 170px;
+    bottom: 40px;
+    right: 40px;
+  }
+
+  .seal-rect {
+    width: 70px;
+    height: 30px;
+  }
+
+  .seal-biz {
+    width: 110px;
+    height: 45px;
+  }
+
+  .seal-border {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 5px;
+  }
+
+  .seal-star {
+    fill: currentColor;
+  }
+
+  .seal-text {
+    font-family: "SimSun", serif;
+    font-weight: bold;
+    fill: currentColor;
+  }
+
+  .text-h {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .text-arc {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .rect-border {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5px;
+  }
+
+  .rect-text {
+    font-family: "Kaishu", "SimSun", serif;
+    font-weight: bold;
+    fill: currentColor;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .biz-text-1 {
+    font-family: "SimSun", serif;
+    font-weight: bold;
+    fill: currentColor;
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .biz-text-2 {
+    font-family: "SimSun", serif;
+    font-weight: bold;
+    fill: currentColor;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 1220px) {
+    .pg-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .controls {
+      position: relative;
+      top: 0;
+      max-height: none;
+    }
   }
 
   @media print {
     @page {
-      size: A5 portrait;
-      margin: 10mm;
+      size: A5 landscape;
+      margin: 0;
     }
 
-    .prescription-preview {
-      width: 148mm;
-      height: 210mm;
-      border: none;
-      box-shadow: none;
-      page-break-after: always;
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+      height: 100%;
+      background: #fff !important;
+      overflow: hidden !important;
     }
 
-    .warning-box,
-    .prescription-form,
-    .btn-generate {
-      display: none;
+    body * {
+      visibility: hidden !important;
     }
-  }
 
-  .prescription-header {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    border: 2px solid #333;
-    margin-bottom: 1rem;
-  }
+    #paperArea,
+    #paperArea * {
+      visibility: visible !important;
+    }
 
-  .prescription-header>div {
-    padding: 0.5rem;
-    border-right: 2px solid #333;
-  }
+    #paperArea {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      width: 210mm !important;
+      height: 148mm !important;
+      border-radius: 0 !important;
+    }
 
-  .prescription-header>div:last-child {
-    border-right: none;
-  }
-
-  .header-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 0.5rem;
-  }
-
-  .prescription-content {
-    line-height: 2;
-    margin-bottom: 2rem;
-  }
-
-  .prescription-footer {
-    text-align: right;
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ccc;
+    .seal-wrapper {
+      outline: none !important;
+      cursor: default;
+    }
   }
 </style>
 
@@ -196,265 +609,678 @@ comments: false
   ⚠️ <strong>重要提示：</strong>本工具仅供学习参考使用，生成的处方单不具有法律效力，不可用于实际就医。
 </div>
 
-<div class="warning-box">
-  <strong>此外：</strong>如果你觉得本工具不好用可以试试这个<a href="https://psydrugs.org/prescription-generator2.0" target="_blank"
-    rel="noopener">更高级的处方生成器</a>，支持更多自定义选项和更漂亮的排版样式！
-</div>
+<div class="pg-wrap">
+  <div class="pg-layout">
+    <div class="paper-shell">
+      <div class="paper-shell-title" style="margin-bottom:0.75rem;color:var(--text-p1);font-size:0.95rem;">🧾
+        处方纸编辑区（支持拖拽印章，点击条码可随机换号）</div>
+      <div class="paper" id="paperArea">
+        <div class="barcode-wrapper" onclick="refreshAllRandom()" title="点击刷新">
+          <div class="barcode-bars" id="barcodeBars"></div>
+        </div>
 
+        <div class="difang-box">底 方</div>
 
+        <div class="header-section">
+          <div class="title-row">
+            <input class="hospital-input" id="headerHospitalName" value="XX市中心医院" oninput="syncHospitalName('header')">
+            <div class="doc-type">处 方 笺</div>
+          </div>
 
-<div class="prescription-form">
-  <div class="form-section">
-    <h3>📋 基本信息</h3>
+          <div class="grid-row">
+            <div class="grid-left"></div>
+            <div class="grid-center">定点医疗机构编码：<input class="sub-input" id="medCodeInput" value="H11010100001"
+                style="width: 110px;"></div>
+            <div class="grid-right">就诊类型：<input class="sub-input" value="普通门诊"></div>
+          </div>
 
-    <div class="form-group">
-      <label for="hospital-name">医院名称</label>
-      <input type="text" id="hospital-name" placeholder="例如：××市人民医院">
+          <div class="grid-row">
+            <div class="grid-left"></div>
+            <div class="grid-center">处方编号：<input class="sub-input" id="prescNumInput" value="2024010100582"
+                style="width: 140px;"></div>
+            <div class="grid-right">费别：<input class="sub-input" value="自费"></div>
+          </div>
+
+          <div class="grid-row">
+            <div class="grid-left">科室：<input class="sub-input" value="内科" style="width: 80px;"></div>
+            <div class="grid-center">药房：<input class="sub-input" value="门诊药房" style="width: 80px;"></div>
+            <div class="grid-right">身份：<input class="sub-input" value="一般人员"></div>
+          </div>
+        </div>
+
+        <div class="info-bar">
+          <div class="ib-left">
+            <div class="info-item">姓名：<input class="data-input" style="width: 70px;"></div>
+            <div class="info-item">性别：<input class="data-input" style="width: 30px;"></div>
+          </div>
+          <div class="ib-center">
+            <div class="info-item">年龄：<input class="data-input" style="width: 50px;"></div>
+          </div>
+          <div class="ib-right">
+            <div class="info-item" style="width: 100%;">单位：<input class="data-input" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <div class="main-table-container">
+
+          <div class="left-col">
+            <div class="diag-wrapper">
+              <div class="diag-label">临床诊断：</div>
+              <textarea class="diag-content"></textarea>
+            </div>
+            <div class="note-section">说明：药物名称前标注有▲表示需皮试药品。</div>
+          </div>
+
+          <div class="right-col">
+            <div class="rp-symbol">℞</div>
+            <textarea class="text-content"></textarea>
+            <div class="rx-footer-row">
+              <div class="rx-sign-item">医师签字：<input class="rx-input" style="width: 80px;"></div>
+              <div class="rx-sign-item">日期：<input class="rx-input" id="dateInput" style="width: 100px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div>审核 <input class="sign-input"></div>
+          <div>调配 <input class="sign-input"></div>
+          <div>核对 <input class="sign-input"></div>
+          <div>发药 <input class="sign-input"></div>
+          <div>金额 <input class="sign-input" style="width: 60px;"></div>
+        </div>
+
+        <div class="seal-wrapper seal-circle" id="sealCircle" onclick="selectSeal(this)" data-rotation="-2"
+          data-grunge="60" data-fade="80" data-fade-angle="45">
+          <div class="seal-body">
+            <svg class="seal-svg" viewBox="0 0 170 170">
+              <defs>
+                <path id="textPathTop" d="M 31,110 A 60,60 0 1,1 139,110" />
+              </defs>
+              <g class="faded-seal-content" style="mask: url(#mask_sealCircle)">
+                <circle cx="85" cy="85" r="75" class="seal-border" />
+                <polygon points="85,55 91,73 110,73 95,84 101,102 85,91 69,102 75,84 60,73 79,73" class="seal-star" />
+                <text class="seal-text text-arc" text-anchor="middle" id="topTextParent">
+                  <textPath xlink:href="#textPathTop" startOffset="50%" id="svgTopText">XX市中心医院</textPath>
+                </text>
+                <text class="seal-text text-h" x="85" y="128" text-anchor="middle" id="svgBottomText">处方专用章</text>
+              </g>
+            </svg>
+          </div>
+          <div class="noise-overlay" id="noiseLayerCircle" style="opacity: 0.54;"></div>
+        </div>
+
+        <div id="rectSealsContainer"></div>
+      </div>
     </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label for="clinic-number">门诊号</label>
-        <input type="text" id="clinic-number" placeholder="例如：2025122200001">
+    <div class="controls" id="draggableControls">
+      <h3 class="controls-header" id="controlsHandle">印章设置（可拖动）</h3>
+
+      <div id="noSelectionMsg" style="color:var(--text-p2); text-align:center; padding:10px;">请点击画面上的印章进行单独设置</div>
+
+      <div id="circleEditArea" class="hidden">
+        <div class="section-title">编辑医院公章</div>
+        <div class="control-group">
+          <label>医院名称（同步）：</label>
+          <input type="text" id="sealTopText" oninput="syncHospitalName('control')">
+          <label style="margin-top:5px;">下部文字：</label>
+          <input type="text" id="sealBottomText" value="处方专用章" oninput="updateCircularSeal()">
+          <label style="margin-top:5px;">旋转角度：</label>
+          <input type="range" id="circleRotate" min="-180" max="180" oninput="updateActiveSealRotate()">
+          <label style="margin-top:5px;">磨损程度：</label>
+          <input type="range" id="circleGrunge" min="0" max="100" oninput="updateActiveSealGrunge()">
+          <label style="margin-top:5px;">墨色深浅（右拉变实心）：</label>
+          <input type="range" id="circleFade" min="0" max="100" oninput="updateActiveSealFade()">
+          <label style="margin-top:5px;">墨色方向（旋转渐变）：</label>
+          <input type="range" id="circleFadeAngle" min="0" max="360" oninput="updateActiveSealFadeAngle()">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="visit-time">就诊时间</label>
-        <input type="datetime-local" id="visit-time">
-      </div>
-    </div>
-
-    <div class="form-row-3">
-      <div class="form-group">
-        <label for="patient-name">姓名</label>
-        <input type="text" id="patient-name" placeholder="患者姓名">
-      </div>
-
-      <div class="form-group">
-        <label for="gender">性别</label>
-        <select id="gender">
-          <option value="">请选择</option>
-          <option value="男">男</option>
-          <option value="女">女</option>
-        </select>
+      <div id="rectEditArea" class="hidden">
+        <div class="section-title">编辑方形印章</div>
+        <div class="control-group">
+          <label>第一行（姓名/状态）：</label>
+          <input type="text" id="activeSealText" oninput="updateActiveSealText()">
+          <label style="margin-top:5px;">第二行（日期/空白）：</label>
+          <input type="text" id="activeSealText2" placeholder="选填，如日期" oninput="updateActiveSealText()">
+          <label style="margin-top:5px;">旋转角度：</label>
+          <input type="range" id="activeSealRotate" min="-180" max="180" oninput="updateActiveSealRotate()">
+          <label style="margin-top:5px;">磨损程度（独立）：</label>
+          <input type="range" id="activeSealGrunge" min="0" max="100" oninput="updateActiveSealGrunge()">
+          <label style="margin-top:5px;">墨色深浅（独立）：</label>
+          <input type="range" id="activeSealFade" min="0" max="100" oninput="updateActiveSealFade()">
+          <label style="margin-top:5px;">墨色方向（旋转渐变）：</label>
+          <input type="range" id="activeSealFadeAngle" min="0" max="360" oninput="updateActiveSealFadeAngle()">
+          <button class="btn btn-red" onclick="deleteActiveSeal()">删除此章</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="age">年龄</label>
-        <input type="number" id="age" placeholder="年龄" min="0" max="150">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="contact">联系方式</label>
-        <input type="text" id="contact" placeholder="手机号码">
+      <div class="section-title">通用操作</div>
+      <div class="control-group">
+        <button class="btn btn-green" onclick="addRectSeal()">➕ 添加个人名章（小）</button>
+        <button class="btn btn-blue" onclick="addBizSeal()">➕ 添加业务章</button>
+        <label style="margin-top:10px;">印章颜色（全局）：</label>
+        <input type="color" id="sealColor" value="#d90000" oninput="updateSealColor()">
       </div>
 
-      <div class="form-group">
-        <label for="department">科室</label>
-        <input type="text" id="department" placeholder="例如：精神科">
+      <div class="control-group">
+        <button class="btn" style="background: linear-gradient(135deg, #434343 0%, #000000 100%); margin-top:0;"
+          onclick="refreshAllRandom()">🔄 换号（随机日期）</button>
       </div>
+
+      <button class="btn" onclick="window.print()">🖨️ 打印处方</button>
     </div>
-  </div>
-
-  <div class="form-section">
-    <h3>📝 诊疗信息</h3>
-
-    <div class="form-group">
-      <label for="condition">病情演变</label>
-      <textarea id="condition" placeholder="描述患者病情的发展过程、主要症状、持续时间等..."></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="examination">辅助检查</label>
-      <textarea id="examination" placeholder="已完成的检查项目及结果，如血常规、影像学检查等..."></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="diagnosis">主要诊断</label>
-      <textarea id="diagnosis" placeholder="根据症状和检查结果给出的诊断..."></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="treatment">诊疗意见</label>
-      <textarea id="treatment" placeholder="治疗方案、用药建议、注意事项、复诊时间等..."></textarea>
-    </div>
-  </div>
-
-  <div class="form-section">
-    <h3>👨‍⚕️ 医师信息</h3>
-
-    <div class="form-group">
-      <label for="doctor-name">医师签名</label>
-      <input type="text" id="doctor-name" placeholder="医师姓名">
-    </div>
-  </div>
-
-  <button class="btn-generate" onclick="generatePrescription()">
-    📄 生成处方预览
-  </button>
-</div>
-
-<div class="result-container" id="result">
-  <h2>📝 处方预览</h2>
-  <div class="prescription-preview" id="preview"></div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-    <button class="btn-generate" onclick="downloadPDF()">
-      📄 下载PDF处方
-    </button>
-    <button class="btn-generate" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"
-      onclick="window.print()">
-      🖨️ 打印处方
-    </button>
   </div>
 </div>
 
 <script>
-  // 设置默认就诊时间为当前时间
-  document.addEventListener('DOMContentLoaded', function () {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('visit-time').value = `${year}-${month}-${day}T${hours}:${minutes}`;
-  });
-
-  function generatePrescription() {
-    const hospitalName = document.getElementById('hospital-name').value;
-    const clinicNumber = document.getElementById('clinic-number').value;
-    const visitTime = document.getElementById('visit-time').value;
-    const patientName = document.getElementById('patient-name').value;
-    const gender = document.getElementById('gender').value;
-    const age = document.getElementById('age').value;
-    const contact = document.getElementById('contact').value;
-    const department = document.getElementById('department').value;
-    const condition = document.getElementById('condition').value;
-    const examination = document.getElementById('examination').value;
-    const diagnosis = document.getElementById('diagnosis').value;
-    const treatment = document.getElementById('treatment').value;
-    const doctorName = document.getElementById('doctor-name').value;
-
-    // 基础验证
-    if (!hospitalName || !patientName || !gender || !doctorName) {
-      alert('请填写必填信息（医院名称、姓名、性别、医师签名）');
-      return;
+  function generateBarcode() {
+    const container = document.getElementById('barcodeBars');
+    container.innerHTML = '';
+    for (let index = 0; index < 35; index++) {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.width = (Math.floor(Math.random() * 4) + 1) + 'px';
+      bar.style.marginRight = (Math.floor(Math.random() * 4) + 1) + 'px';
+      container.appendChild(bar);
     }
-
-    // 格式化时间
-    const formattedTime = visitTime ? new Date(visitTime).toLocaleString('zh-CN', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    }) : '';
-
-    // 生成处方HTML
-    let html = `
-    <table style="width: 100%; border-collapse: collapse; border: 2px solid #000; margin-bottom: 1.5rem;">
-      <tr>
-        <td style="border: 1px solid #000; padding: 8px; font-weight: bold; text-align: center;" colspan="3"><strong>医院名称：</strong>${hospitalName || '___________'}</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 8px; width: 33.3%;"><strong>门诊号：</strong>${clinicNumber || '___________'}</td>
-        <td style="border: 1px solid #000; padding: 8px; width: 33.3%;"><strong>性别：</strong>${gender || '___'}</td>
-        <td style="border: 1px solid #000; padding: 8px; width: 33.3%;"><strong>年龄：</strong>${age || '___'}岁</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 8px;"><strong>姓名：</strong>${patientName || '___________'}</td>
-        <td style="border: 1px solid #000; padding: 8px;"><strong>联系方式：</strong>${contact || '___________'}</td>
-        <td style="border: 1px solid #000; padding: 8px;"><strong>科室：</strong>${department || '___________'}</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 8px; font-weight: bold; text-align: center;" colspan="3"><strong>就诊时间：</strong>${formattedTime || '___________'}</td>
-      </tr>
-    </table>
-    
-    <div style="border-bottom: 2px solid #333; margin: 1rem 0;"></div>
-    
-    <div style="margin-bottom: 1rem;">
-      <div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.95rem;">病情演变：</div>
-      <div style="line-height: 1.5; text-indent: 2em; min-height: 40px; white-space: pre-wrap; font-size: 0.9rem;">${condition || '（未填写）'}</div>
-    </div>
-    
-    <div style="margin-bottom: 1rem;">
-      <div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.95rem;">辅助检查：</div>
-      <div style="line-height: 1.5; text-indent: 2em; min-height: 40px; white-space: pre-wrap; font-size: 0.9rem;">${examination || '（未填写）'}</div>
-    </div>
-    
-    <div style="margin-bottom: 1rem;">
-      <div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.95rem;">主要诊断：</div>
-      <div style="line-height: 1.5; text-indent: 2em; min-height: 30px; white-space: pre-wrap; font-size: 0.9rem;">${diagnosis || '（未填写）'}</div>
-    </div>
-    
-    <div style="margin-bottom: 1.5rem;">
-      <div style="font-weight: bold; margin-bottom: 0.3rem; font-size: 0.95rem;">诊疗意见：</div>
-      <div style="line-height: 1.5; text-indent: 2em; min-height: 50px; white-space: pre-wrap; font-size: 0.9rem;">${treatment || '（未填写）'}</div>
-    </div>
-    
-    <div style="margin-bottom: 1.5rem;">
-      <div style="font-weight: bold; margin-bottom: 0.5rem; font-size: 0.95rem;">注意事项：</div>
-      <div style="line-height: 1.8; font-size: 0.85rem; text-indent: 2em;">
-        建议定期复诊，妥善保管药品，按医嘱服药，已告知常见药物不良反应详见说明书，服药后避免饮酒、驾驶、高空作业或操作危险机械。若病情加重或出现明显不良反应，随时就诊我院；若同时患有躯体疾病，建议到综合医院就诊。
-      </div>
-    </div>
-    
-    <div style="text-align: right; margin-top: 2rem; padding-top: 0.8rem; border-top: 1px solid #999;">
-      <div style="margin-bottom: 0.3rem; font-size: 0.9rem;">医师签名：<span style="font-size: 1.1rem; font-weight: bold; margin-left: 0.5rem;">${doctorName}</span></div>
-      <div style="color: #666; font-size: 0.85rem;">处方日期：${new Date().toLocaleDateString('zh-CN')}</div>
-    </div>
-  `;
-
-    document.getElementById('preview').innerHTML = html;
-    document.getElementById('result').classList.add('show');
-
-    // 滚动到结果
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const preview = document.getElementById('preview');
+  function generateMedCode() {
+    let code = 'H';
+    for (let index = 0; index < 11; index++) {
+      code += Math.floor(Math.random() * 10);
+    }
+    document.getElementById('medCodeInput').value = code;
+  }
 
-    if (!preview || !preview.innerHTML) {
-      alert('请先生成处方预览');
+  function generatePrescNum() {
+    const now = new Date();
+    const daysBack = Math.floor(Math.random() * 90);
+    const randomDate = new Date(now.getTime() - (daysBack * 24 * 60 * 60 * 1000));
+    const year = randomDate.getFullYear();
+    const month = String(randomDate.getMonth() + 1).padStart(2, '0');
+    const day = String(randomDate.getDate()).padStart(2, '0');
+    let randomPart = '';
+    for (let index = 0; index < 5; index++) {
+      randomPart += Math.floor(Math.random() * 10);
+    }
+
+    const dateStr = `${year}-${month}-${day}`;
+    document.getElementById('prescNumInput').value = `${year}${month}${day}${randomPart}`;
+    document.getElementById('dateInput').value = dateStr;
+    updateAllBizSealsDate(dateStr);
+    randomizeAllSealsGradient();
+  }
+
+  function refreshAllRandom() {
+    generateBarcode();
+    generateMedCode();
+    generatePrescNum();
+  }
+
+  function generateHeavyNoise(width, height) {
+    let svgContent = `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+    const count = (width * height) / 10;
+    for (let index = 0; index < count; index++) {
+      const x = Math.random() * width;
+      const y = Math.random() * height;
+      const radius = Math.random() * 1.5;
+      svgContent += `<circle cx="${x}" cy="${y}" r="${radius}" fill="white" />`;
+    }
+
+    for (let index = 0; index < 8; index++) {
+      const x = Math.random() * width;
+      const y = Math.random() * height;
+      const pts = `${x},${y} ${x + Math.random() * 8},${y + Math.random() * 4} ${x + Math.random() * 4},${y + Math.random() * 8}`;
+      svgContent += `<polygon points="${pts}" fill="white" />`;
+    }
+
+    svgContent += '</svg>';
+    return svgContent;
+  }
+
+  function initCircleSeal() {
+    document.getElementById('noiseLayerCircle').innerHTML = generateHeavyNoise(170, 170);
+    generateUniqueGradient('sealCircle', 45);
+  }
+
+  function syncHospitalName(source) {
+    const headerInput = document.getElementById('headerHospitalName');
+    const controlInput = document.getElementById('sealTopText');
+    if (source === 'header') {
+      controlInput.value = headerInput.value;
+    } else if (source === 'control') {
+      headerInput.value = controlInput.value;
+    }
+    updateCircularSeal();
+  }
+
+  function updateCircularSeal() {
+    const topText = document.getElementById('sealTopText').value;
+    const bottomText = document.getElementById('sealBottomText').value;
+    const svgTopText = document.getElementById('svgTopText');
+    const topTextParent = document.getElementById('topTextParent');
+    const svgBottomText = document.getElementById('svgBottomText');
+
+    svgTopText.textContent = topText;
+    svgBottomText.textContent = bottomText;
+
+    const textLength = topText.length;
+    let topFontSize = 22;
+    let letterSpacing = 3;
+    let limitLength = null;
+
+    if (textLength <= 8) {
+      topFontSize = 26;
+      letterSpacing = 5;
+    } else if (textLength <= 14) {
+      topFontSize = 22 - (textLength - 8) * 0.5;
+      letterSpacing = 2;
+    } else {
+      topFontSize = 18;
+      letterSpacing = 0;
+      if (textLength > 16) {
+        limitLength = 220;
+      }
+    }
+
+    topTextParent.setAttribute('font-size', topFontSize);
+    topTextParent.setAttribute('letter-spacing', letterSpacing);
+    if (limitLength) {
+      svgTopText.setAttribute('textLength', limitLength);
+      svgTopText.setAttribute('lengthAdjust', 'spacingAndGlyphs');
+    } else {
+      svgTopText.removeAttribute('textLength');
+      svgTopText.removeAttribute('lengthAdjust');
+    }
+
+    let bottomFontSize = 20;
+    if (bottomText.length > 5) {
+      bottomFontSize = 20 - (bottomText.length - 5) * 1.5;
+    }
+    if (bottomFontSize < 12) {
+      bottomFontSize = 12;
+    }
+    svgBottomText.setAttribute('font-size', bottomFontSize);
+  }
+
+  let activeSeal = null;
+  let sealCount = 0;
+
+  function addRectSeal(initialText = '王医生') {
+    createSeal('seal-rect', 70, 30, initialText, '', 'rect-text');
+  }
+
+  function addBizSeal() {
+    let date = document.getElementById('dateInput').value;
+    if (!date) {
+      date = '2024-01-01';
+    }
+    createSeal('seal-biz', 110, 45, '已发药', date.replace(/-/g, '.'), 'biz-text-1');
+  }
+
+  function createSeal(cssClass, width, height, text1, text2, textClass) {
+    sealCount += 1;
+    const id = `seal_${sealCount}`;
+    const wrapper = document.createElement('div');
+    wrapper.className = `seal-wrapper ${cssClass}`;
+    wrapper.id = id;
+    const randOffset = Math.random() * 50;
+    wrapper.style.left = (350 + randOffset) + 'px';
+    wrapper.style.top = (400 + randOffset) + 'px';
+    wrapper.setAttribute('data-rotation', '0');
+    wrapper.setAttribute('data-grunge', '60');
+    wrapper.setAttribute('data-fade', '80');
+    wrapper.setAttribute('data-fade-angle', '45');
+    wrapper.setAttribute('data-type', text2 ? 'biz' : 'name');
+
+    const noise = generateHeavyNoise(width, height);
+
+    let svgInner = '';
+    if (text2) {
+      svgInner = `
+        <g class="faded-seal-content" style="mask: url(#mask_${id})">
+          <rect x="2" y="2" width="${width - 4}" height="${height - 4}" class="rect-border" />
+          <text class="biz-text-1 rect-text-main" x="${width / 2}" y="${height / 2 - 2}" text-anchor="middle">${text1}</text>
+          <text class="biz-text-2 rect-text-sub" x="${width / 2}" y="${height - 8}" text-anchor="middle">${text2}</text>
+        </g>
+      `;
+    } else {
+      svgInner = `
+        <g class="faded-seal-content" style="mask: url(#mask_${id})">
+          <rect x="1.5" y="1.5" width="${width - 3}" height="${height - 3}" class="rect-border" />
+          <text class="${textClass} rect-text-main" x="${width / 2}" y="${height / 2 + 6}" text-anchor="middle">${text1}</text>
+          <text class="rect-text-sub" x="${width / 2}" y="${height}" text-anchor="middle" style="display:none"></text>
+        </g>
+      `;
+    }
+
+    wrapper.innerHTML = `
+      <div class="seal-body">
+        <svg class="seal-svg" viewBox="0 0 ${width} ${height}">
+          <defs>
+            <linearGradient id="grad_${id}" x1="14.64%" y1="14.64%" x2="85.36%" y2="85.36%">
+              <stop offset="0%" stop-color="white" stop-opacity="1" />
+              <stop offset="100%" stop-color="white" stop-opacity="0.2" class="fade-stop" />
+            </linearGradient>
+            <mask id="mask_${id}">
+              <rect x="0" y="0" width="100%" height="100%" fill="url(#grad_${id})" />
+            </mask>
+          </defs>
+          ${svgInner}
+        </svg>
+      </div>
+      <div class="noise-overlay" style="opacity:0.54">${noise}</div>
+    `;
+
+    wrapper.onclick = function (event) {
+      event.stopPropagation();
+      selectSeal(this);
+    };
+
+    initDrag(wrapper);
+    document.getElementById('rectSealsContainer').appendChild(wrapper);
+    generateUniqueGradient(id, 45);
+    selectSeal(wrapper);
+    updateSealColor();
+  }
+
+  function generateUniqueGradient(id, angleDeg) {
+    const radian = angleDeg * Math.PI / 180;
+    const x1 = 50 - 50 * Math.cos(radian);
+    const y1 = 50 - 50 * Math.sin(radian);
+    const x2 = 50 + 50 * Math.cos(radian);
+    const y2 = 50 + 50 * Math.sin(radian);
+
+    const container = document.getElementById(id);
+    if (!container) {
+      return;
+    }
+    const svg = container.querySelector('svg');
+    const gradId = id === 'sealCircle' ? 'grad_sealCircle' : `grad_${id}`;
+    const existingGrad = svg.querySelector(`#${gradId}`);
+
+    if (existingGrad) {
+      existingGrad.setAttribute('x1', x1 + '%');
+      existingGrad.setAttribute('y1', y1 + '%');
+      existingGrad.setAttribute('x2', x2 + '%');
+      existingGrad.setAttribute('y2', y2 + '%');
       return;
     }
 
-    // 使用html2canvas将HTML转换为canvas
-    html2canvas(preview, {
-      scale: 2, // 提高清晰度
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff'
-    }).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
+    const defs = `
+      <defs>
+        <linearGradient id="${gradId}" x1="${x1}%" y1="${y1}%" x2="${x2}%" y2="${y2}%">
+          <stop offset="0%" stop-color="white" stop-opacity="1" />
+          <stop offset="100%" stop-color="white" stop-opacity="0.2" class="fade-stop" />
+        </linearGradient>
+        <mask id="mask_${id}">
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#${gradId})" />
+        </mask>
+      </defs>
+    `;
+    svg.insertAdjacentHTML('afterbegin', defs);
+  }
 
-      // 创建PDF
-      const doc = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: [148, 210] // A5 尺寸
-      });
+  function updateAllBizSealsDate(newDateStr) {
+    const formatted = newDateStr.replace(/-/g, '.');
+    document.querySelectorAll('.seal-wrapper[data-type="biz"]').forEach((seal) => {
+      const subText = seal.querySelector('.rect-text-sub');
+      if (subText) {
+        subText.textContent = formatted;
+      }
+    });
 
-      const imgWidth = 148;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    if (activeSeal && activeSeal.getAttribute('data-type') === 'biz') {
+      document.getElementById('activeSealText2').value = formatted;
+    }
+  }
 
-      doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+  function selectSeal(element) {
+    if (activeSeal) {
+      activeSeal.classList.remove('is-selected');
+    }
+    activeSeal = element;
+    activeSeal.classList.add('is-selected');
 
-      // 获取患者姓名用于文件名
-      const patientName = document.getElementById('patient-name').value || '患者';
-      const fileName = `处方单_${patientName.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_')}_${new Date().getTime()}.pdf`;
+    document.getElementById('noSelectionMsg').classList.add('hidden');
+    const rotation = element.getAttribute('data-rotation') || 0;
+    const grunge = element.getAttribute('data-grunge') || 60;
+    const fade = element.getAttribute('data-fade') || 80;
+    const fadeAngle = element.getAttribute('data-fade-angle') || 45;
 
-      doc.save(fileName);
-      alert('✅ PDF已生成并开始下载');
-    }).catch(error => {
-      console.error('生成PDF失败:', error);
-      alert('❌ PDF生成失败，请重试');
+    if (element.id === 'sealCircle') {
+      document.getElementById('circleEditArea').classList.remove('hidden');
+      document.getElementById('rectEditArea').classList.add('hidden');
+      document.getElementById('circleRotate').value = rotation;
+      document.getElementById('circleGrunge').value = grunge;
+      document.getElementById('circleFade').value = fade;
+      document.getElementById('circleFadeAngle').value = fadeAngle;
+      document.getElementById('sealTopText').value = document.getElementById('headerHospitalName').value;
+      document.getElementById('sealBottomText').value = document.getElementById('svgBottomText').textContent;
+      return;
+    }
+
+    document.getElementById('circleEditArea').classList.add('hidden');
+    document.getElementById('rectEditArea').classList.remove('hidden');
+    document.getElementById('activeSealRotate').value = rotation;
+    document.getElementById('activeSealGrunge').value = grunge;
+    document.getElementById('activeSealFade').value = fade;
+    document.getElementById('activeSealFadeAngle').value = fadeAngle;
+    document.getElementById('activeSealText').value = activeSeal.querySelector('.rect-text-main').textContent;
+    const text2 = activeSeal.querySelector('.rect-text-sub');
+    document.getElementById('activeSealText2').value = (text2 && text2.style.display !== 'none') ? text2.textContent : '';
+  }
+
+  function updateActiveSealText() {
+    if (!activeSeal || activeSeal.id === 'sealCircle') {
+      return;
+    }
+
+    const text1 = document.getElementById('activeSealText').value;
+    const text2 = document.getElementById('activeSealText2').value;
+    const mainText = activeSeal.querySelector('.rect-text-main');
+    const subText = activeSeal.querySelector('.rect-text-sub');
+    mainText.textContent = text1;
+
+    if (text2.trim()) {
+      subText.textContent = text2;
+      subText.style.display = 'block';
+      mainText.setAttribute('y', activeSeal.clientHeight / 2 - 2);
+    } else {
+      subText.style.display = 'none';
+      mainText.setAttribute('y', activeSeal.clientHeight / 2 + 6);
+    }
+  }
+
+  function applyTransform(element) {
+    const currentTransform = element.style.transform || '';
+    const translateMatch = currentTransform.match(/translate3d\([^)]+\)/);
+    const translateStr = translateMatch ? translateMatch[0] : 'translate3d(0px, 0px, 0px)';
+    const rotation = element.getAttribute('data-rotation') || 0;
+    element.style.transform = `${translateStr} rotate(${rotation}deg)`;
+  }
+
+  function updateActiveSealRotate() {
+    if (!activeSeal) {
+      return;
+    }
+    const value = activeSeal.id === 'sealCircle'
+      ? document.getElementById('circleRotate').value
+      : document.getElementById('activeSealRotate').value;
+    activeSeal.setAttribute('data-rotation', value);
+    applyTransform(activeSeal);
+  }
+
+  function updateActiveSealGrunge() {
+    if (!activeSeal) {
+      return;
+    }
+    const value = activeSeal.id === 'sealCircle'
+      ? document.getElementById('circleGrunge').value
+      : document.getElementById('activeSealGrunge').value;
+    activeSeal.setAttribute('data-grunge', value);
+    const overlay = activeSeal.querySelector('.noise-overlay');
+    if (overlay) {
+      overlay.style.opacity = value / 110;
+    }
+  }
+
+  function updateActiveSealFade() {
+    if (!activeSeal) {
+      return;
+    }
+    const value = activeSeal.id === 'sealCircle'
+      ? document.getElementById('circleFade').value
+      : document.getElementById('activeSealFade').value;
+    activeSeal.setAttribute('data-fade', value);
+    const gradId = activeSeal.id === 'sealCircle' ? 'grad_sealCircle' : `grad_${activeSeal.id}`;
+    const gradient = activeSeal.querySelector(`svg #${gradId}`);
+    if (!gradient) {
+      return;
+    }
+    const stop = gradient.querySelector('.fade-stop');
+    if (stop) {
+      stop.setAttribute('stop-opacity', 0.1 + (value / 100) * 0.9);
+    }
+  }
+
+  function updateActiveSealFadeAngle() {
+    if (!activeSeal) {
+      return;
+    }
+    const value = activeSeal.id === 'sealCircle'
+      ? document.getElementById('circleFadeAngle').value
+      : document.getElementById('activeSealFadeAngle').value;
+    activeSeal.setAttribute('data-fade-angle', value);
+    generateUniqueGradient(activeSeal.id, Number(value));
+    updateActiveSealFade();
+  }
+
+  function randomizeAllSealsGradient() {
+    document.querySelectorAll('.seal-wrapper').forEach((seal) => {
+      const angle = Math.random() * 360;
+      seal.setAttribute('data-fade-angle', angle);
+      generateUniqueGradient(seal.id, angle);
+      const fade = Number(seal.getAttribute('data-fade') || 80);
+      const gradId = seal.id === 'sealCircle' ? 'grad_sealCircle' : `grad_${seal.id}`;
+      const gradient = seal.querySelector(`svg #${gradId}`);
+      const stop = gradient ? gradient.querySelector('.fade-stop') : null;
+      if (stop) {
+        stop.setAttribute('stop-opacity', 0.1 + (fade / 100) * 0.9);
+      }
     });
   }
 
+  function deleteActiveSeal() {
+    if (!activeSeal || activeSeal.id === 'sealCircle') {
+      return;
+    }
+    activeSeal.remove();
+    activeSeal = null;
+    document.getElementById('rectEditArea').classList.add('hidden');
+    document.getElementById('noSelectionMsg').classList.remove('hidden');
+  }
+
+  function updateSealColor() {
+    const color = document.getElementById('sealColor').value;
+    document.querySelectorAll('.seal-body').forEach((sealBody) => {
+      sealBody.style.color = color;
+    });
+  }
+
+  function initDrag(element) {
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let initialX = 0;
+    let initialY = 0;
+
+    const startHandler = (event) => {
+      const pointer = event.type === 'touchstart' ? event.touches[0] : event;
+      startX = pointer.clientX;
+      startY = pointer.clientY;
+      const match = (element.style.transform || '').match(/translate3d\(([^p]+)px,\s*([^p]+)px/);
+      initialX = match ? parseFloat(match[1]) : 0;
+      initialY = match ? parseFloat(match[2]) : 0;
+      isDragging = true;
+      selectSeal(element);
+    };
+
+    const moveHandler = (event) => {
+      if (!isDragging) {
+        return;
+      }
+      event.preventDefault();
+      const pointer = event.type === 'touchmove' ? event.touches[0] : event;
+      const deltaX = pointer.clientX - startX;
+      const deltaY = pointer.clientY - startY;
+      const rotation = element.getAttribute('data-rotation') || 0;
+      element.style.transform = `translate3d(${initialX + deltaX}px, ${initialY + deltaY}px, 0) rotate(${rotation}deg)`;
+    };
+
+    const endHandler = () => {
+      isDragging = false;
+    };
+
+    element.addEventListener('mousedown', startHandler);
+    document.addEventListener('mousemove', moveHandler);
+    document.addEventListener('mouseup', endHandler);
+    element.addEventListener('touchstart', startHandler, { passive: true });
+    document.addEventListener('touchmove', moveHandler, { passive: false });
+    document.addEventListener('touchend', endHandler);
+  }
+
+  document.getElementById('paperArea').addEventListener('click', function (event) {
+    if (event.target.id !== 'paperArea') {
+      return;
+    }
+    if (activeSeal) {
+      activeSeal.classList.remove('is-selected');
+    }
+    activeSeal = null;
+    document.getElementById('circleEditArea').classList.add('hidden');
+    document.getElementById('rectEditArea').classList.add('hidden');
+    document.getElementById('noSelectionMsg').classList.remove('hidden');
+  });
+
+  (function initControlsDrag() {
+    const controls = document.getElementById('draggableControls');
+    const handle = document.getElementById('controlsHandle');
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let initialX = 0;
+    let initialY = 0;
+
+    handle.addEventListener('mousedown', function (event) {
+      dragging = true;
+      startX = event.clientX;
+      startY = event.clientY;
+      const match = (controls.style.transform || '').match(/translate3d\(([^p]+)px,\s*([^p]+)px/);
+      initialX = match ? parseFloat(match[1]) : 0;
+      initialY = match ? parseFloat(match[2]) : 0;
+    });
+
+    document.addEventListener('mousemove', function (event) {
+      if (!dragging) {
+        return;
+      }
+      event.preventDefault();
+      controls.style.transform = `translate3d(${initialX + event.clientX - startX}px, ${initialY + event.clientY - startY}px, 0)`;
+    });
+
+    document.addEventListener('mouseup', function () {
+      dragging = false;
+    });
+  })();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    refreshAllRandom();
+    initCircleSeal();
+    addRectSeal('王医生');
+    updateSealColor();
+    selectSeal(document.getElementById('sealCircle'));
+  });
 </script>
