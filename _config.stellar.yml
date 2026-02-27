@@ -104,7 +104,7 @@ site_tree:
     rightbar:
     nav_tabs:
       "药物效果": /effects/
-      "处方生成器": /prescription-generator/
+      "文档演示": /presentation/
       "贡献者": /contributors/
   # 博客专栏列表页配置
   index_topic:
@@ -118,7 +118,7 @@ site_tree:
     rightbar:
     nav_tabs:
       "药物效果": /effects/
-      "处方生成器": /prescription-generator/
+      "文档演示": /presentation/
       "贡献者": /contributors/
   # -- 内容类页面 -- #
   # 博客文章内页配置
