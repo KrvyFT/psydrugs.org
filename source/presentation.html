@@ -3,7 +3,7 @@ layout: page
 title: 文档演示
 description: 医院处方单演示页面，展示了使用 HTML/CSS 构建的处方单模板，包含可编辑字段、动态条码生成、可拖拽印章和签名等功能。此页面仅用于学习和演示目的，不构成医疗建议。
 date: 2025-12-22
-updated: 2025-12-22
+updated: 2026-01-27
 comments: false
 ---
 <!--
@@ -385,6 +385,7 @@ License: MIT + 自定义非商用附加条款（NC Addendum）
     top: 0;
     left: 0;
     cursor: move;
+    touch-action: none;
     z-index: 100;
     user-select: none;
     mix-blend-mode: multiply;
@@ -1165,6 +1166,26 @@ License: MIT + 自定义非商用附加条款（NC Addendum）
           drag.initY = elState.y;
           e.stopPropagation();
         });
+
+        DOM.paper.addEventListener('touchstart', (e) => {
+          const el = e.target.closest('.draggable-item');
+          if (!el) {
+            selectElement(null);
+            return;
+          }
+          const touch = e.touches && e.touches[0];
+          if (!touch) return;
+          selectElement(el);
+          const elState = state.elements[el.id];
+          if (!elState) return;
+          drag.isDragging = true;
+          drag.startX = touch.clientX;
+          drag.startY = touch.clientY;
+          drag.initX = elState.x;
+          drag.initY = elState.y;
+          e.preventDefault();
+          e.stopPropagation();
+        }, { passive: false });
       }
 
       window.addEventListener('mousemove', (e) => {
@@ -1179,6 +1200,24 @@ License: MIT + 自定义非商用附加条款（NC Addendum）
       });
 
       window.addEventListener('mouseup', () => {
+        drag.isDragging = false;
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!drag.isDragging || !state.activeId) return;
+        const touch = e.touches && e.touches[0];
+        if (!touch) return;
+        const dx = touch.clientX - drag.startX;
+        const dy = touch.clientY - drag.startY;
+        if (state.elements[state.activeId]) {
+          state.elements[state.activeId].x = drag.initX + dx;
+          state.elements[state.activeId].y = drag.initY + dy;
+          updateElementTransform(state.activeId);
+        }
+        e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('touchend', () => {
         drag.isDragging = false;
       });
 
@@ -1204,6 +1243,36 @@ License: MIT + 自定义非商用附加条款（NC Addendum）
         });
 
         window.addEventListener('mouseup', () => {
+          if (!DOM.canvas) return;
+          canvasPan.isPanning = false;
+          DOM.canvas.classList.remove('is-panning');
+        });
+
+        DOM.canvas.addEventListener('touchstart', (e) => {
+          if (e.target.closest('.draggable-item')) return;
+          if (e.target.closest('input, textarea, button, select, [contenteditable="true"]')) return;
+          const touch = e.touches && e.touches[0];
+          if (!touch) return;
+          canvasPan.isPanning = true;
+          canvasPan.startX = touch.clientX;
+          canvasPan.startY = touch.clientY;
+          canvasPan.scrollLeft = DOM.canvas.scrollLeft;
+          canvasPan.scrollTop = DOM.canvas.scrollTop;
+          DOM.canvas.classList.add('is-panning');
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+          if (!canvasPan.isPanning || !DOM.canvas || drag.isDragging) return;
+          const touch = e.touches && e.touches[0];
+          if (!touch) return;
+          const dx = touch.clientX - canvasPan.startX;
+          const dy = touch.clientY - canvasPan.startY;
+          DOM.canvas.scrollLeft = canvasPan.scrollLeft - dx;
+          DOM.canvas.scrollTop = canvasPan.scrollTop - dy;
+          e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
           if (!DOM.canvas) return;
           canvasPan.isPanning = false;
           DOM.canvas.classList.remove('is-panning');
