@@ -1,6 +1,7 @@
 ---
 title: 加巴喷丁类药物
 date: 2026-02-01
+updated: 2026-02-02
 categories:
   - 药物指南
 tags:

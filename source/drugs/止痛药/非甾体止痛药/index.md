@@ -1,6 +1,7 @@
 ---
 title: 非甾体止痛药
 date: 2026-02-01
+updated: 2026-02-02
 categories:
   - 药物指南
 tags:

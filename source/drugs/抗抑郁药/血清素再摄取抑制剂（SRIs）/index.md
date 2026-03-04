@@ -1,6 +1,7 @@
 ---
 title: "血清素再摄取抑制剂（SRIs）"
 date: 2026-02-01
+updated: 2026-02-02
 categories:
   - 药物指南
 tags:

@@ -2,6 +2,7 @@
 wiki: drugs
 title: 非苯丙胺类兴奋剂
 date: 2026-02-01
+updated: 2026-02-02
 categories:
   - 药物指南
 tags:
