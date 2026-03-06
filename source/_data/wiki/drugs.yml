@@ -14,10 +14,11 @@ comments:
 base_dir: /drugs/
 tree:
   "绪论":
-    - /
     - index
     - 索引
     - 药物作用
+    - 简易od药物介绍
+    - 复方专题
   "常见od药物":
     - 常见od药物/右美沙芬_愈美片
     - 常见od药物/普瑞巴林
