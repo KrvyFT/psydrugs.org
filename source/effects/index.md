@@ -17,15 +17,25 @@ updated: 2024-06-15 18:30:00
 ### 解离类
 
 - [解离](/effects/Dissociation) - 精神与知觉分离状态
-- [反解离](/effects/Antidissociation) - 解离的对立状态（危险）
+- [反解离](/effects/Antidissociation) - 解离的对立状态（危险）^[后藤自己都批斗]
 
 ### 致幻类
 
-- [迷幻剂](/effects/Psychedelic) - 视觉听觉触感及思维的变化
+- [迷幻](/effects/Psychedelic) - 视觉听觉触感及思维的变化
 
 ### 精神症状类
 
 - [谵妄](/effects/Delirium) - 抗胆碱能诱导的精神异常状态
+- [血清素综合征](/effects/5HT_syndrome)
+
+### 肢体症状类
+
+- 共济失调
+- 癫痫
+
+### 补剂
+
+- 促智
 
 ---
 
