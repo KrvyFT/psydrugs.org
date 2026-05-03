@@ -32,8 +32,9 @@ ollama pull llama2
 
 在本地或公网上测试 API：
 
-```bash# 本地测试
-curl -X POST http://127.0.0.1:443/api/generate \
+```bash
+# 本地测试
+curl -X POST http://127.0.0.1:11434/api/generate \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek",
@@ -41,7 +42,8 @@ curl -X POST http://127.0.0.1:443/api/generate \
     "stream": false
   }'
 
-# 公网测试curl -X POST https://frp-bar.com:56559/api/generate \
+# 公网测试
+curl -X POST https://frp-bar.com:56559/api/generate \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek",
