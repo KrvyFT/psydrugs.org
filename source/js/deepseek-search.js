@@ -9,7 +9,7 @@
 // 3. 如果需要自定义 API 地址，可追加 data-api-host 属性。
 
 ;(function () {
-  const defaultApiHost = 'http://127.0.0.1:443/api/generate'
+  const defaultApiHost = 'http://127.0.0.1:11434/api/generate'
   const publicApiHost = 'https://frp-bar.com:56559/api/generate'
   const defaultRepo = 'psydrugs.org'
   const defaultTopK = 8
@@ -56,7 +56,83 @@
 
   function renderResults(results) {
     const resultBox = getElement('deepseek-results')
+    const res = await queryOllama(searchText);  function renderResults(results) {
+    const resultBox = getElement('deepseek-results')
     if (!resultBox) return
+
+    resultBox.textContent = ''
+
+    if (!Array.isArray(results) || results.length === 0) {
+      resultBox.textContent = '未找到匹配结果，请尝试更改查询词。'
+      return
+    }
+
+    const list = document.createElement('div')
+    list.className = 'deepseek-results-list'
+
+    results.forEach((item) => {
+      list.appendChild(renderResultItem(item))
+    })
+
+    resultBox.appendChild(list)
+  }  async function onSearch() {
+    const queryInput = getElement('deepseek-query')
+    if (!queryInput) return
+
+    const searchText = queryInput.value.trim()
+    if (!searchText) {
+      showStatus('请输入搜索关键字或问题后再查询。', true)
+      return
+    }
+
+    showStatus('正在查询本地模型，请稍候...', false)
+    renderResults([])
+
+    try {
+      const reply = useOllama ? await queryOllama(searchText) : await queryDeepseek(searchText)
+      const results = []
+
+      if (useOllama && reply.response) {
+        // Ollama 返回直接响应
+        results.push({
+          title: 'Ollama 分析结果',
+          snippet: reply.response
+        })
+      } else if (Array.isArray(reply.data)) {
+        reply.data.forEach((item) => {
+          results.push({
+            title: item.title || item.file_name || item.path || '',
+            path: item.url || item.path || item.file_path || '',
+            snippet: item.snippet || item.text || item.summary || '',
+            score: item.score || item.similarity || item.rank || '',
+          })
+        })
+      } else if (Array.isArray(reply.results)) {
+        reply.results.forEach((item) => {
+          results.push({
+            title: item.title || item.path || '',
+            path: item.url || item.path || '',
+            snippet: item.snippet || item.summary || item.text || '',
+            score: item.score || item.similarity || item.rank || '',
+          })
+        })
+      }
+
+      renderResults(results)
+      showStatus(`已返回 ${results.length} 条结果。`, false)
+    } catch (error) {
+      console.error(error)
+      showStatus(error.message || '查询失败，请检查 API 连接和配置。', true)
+    }
+  }
+    const formattedResults = [
+  {
+    title: 'Ollama 分析结果',
+    snippet: res.response
+  }
+];
+
+renderResults(formattedResults);
 
     resultBox.innerHTML = ''
 
