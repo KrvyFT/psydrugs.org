@@ -1,5 +1,8 @@
 # Ollama 启动脚本 - PowerShell 版本
 
+# 设置 UTF-8 编码
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 Write-Host "Ollama 启动脚本" -ForegroundColor Green
 Write-Host "================" -ForegroundColor Green
 

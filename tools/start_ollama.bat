@@ -1,4 +1,7 @@
 @echo off
+REM 设置 UTF-8 编码
+chcp 65001 > nul
+
 REM Ollama 启动脚本 - 配置为本地 443 端口
 
 echo Ollama 启动脚本
