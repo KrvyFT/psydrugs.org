@@ -62,6 +62,11 @@ menubar:
       icon: /icons/healing.png
       title: 恢复
       url: /recovery/
+    - id: search
+      theme: "#9C27B0"
+      icon: solar:magnifer-bold-duotone
+      title: AI 搜索
+      url: /search/
     # id: 页面中高亮的 menu_id
     # theme: 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
     # icon: 支持 svg/img 标签，可以定义在 icons.yml 文件中，也支持外部图片的 URL
