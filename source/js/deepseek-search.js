@@ -1,327 +1,342 @@
-// Deepseek AI 检索前端集成脚本
-// 使用方法：
-// 1. 在页面 HTML 中添加搜索控件：
-//    <input id="deepseek-query" type="text" placeholder="输入问题或关键词" />
-//    <button id="deepseek-search-button">搜索</button>
-//    <div id="deepseek-results"></div>
-// 2. 在页面底部引入此脚本，并通过 data-api-key 传入 Deepseek API Key：
-//    <script src="/js/deepseek-search.js" data-api-key="YOUR_DEEPSEEK_API_KEY"></script>
-// 3. 如果需要自定义 API 地址，可追加 data-api-host 属性。
+// DeepSeek AI 搜索前端脚本
+// 通过 data-* 参数配置：
+// <script
+//   src="/js/deepseek-search.js"
+//   data-api-key="YOUR_DEEPSEEK_API_KEY"
+//   data-api-host="https://api.deepseek.com/v1/chat/completions"
+//   data-model="deepseek-chat"
+// ></script>
 
-;(function () {
-  const defaultApiHost = 'http://127.0.0.1:11434/api/generate'
-  const publicApiHost = 'https://frp-bar.com:56559/api/generate'
-  const defaultRepo = 'psydrugs.org'
-  const defaultTopK = 8
-  const useOllama = true  // 使用 Ollama 模型
+(function () {
+  const defaultApiHost = "https://api.deepseek.com/chat/completions";
+  const defaultModel = "deepseek-v4-pro";
 
   function getElement(id) {
-    return document.getElementById(id)
+    return document.getElementById(id);
   }
 
-  function renderResultItem(item) {
-    const container = document.createElement('div')
-    container.className = 'deepseek-result-item'
-
-    const title = document.createElement('div')
-    title.className = 'deepseek-result-title'
-    title.textContent = item.title || item.path || '未命名结果'
-    container.appendChild(title)
-
-    if (item.path) {
-      const link = document.createElement('a')
-      link.href = item.path
-      link.textContent = item.path
-      link.className = 'deepseek-result-path'
-      link.target = '_blank'
-      container.appendChild(link)
-    }
-
-    if (item.snippet) {
-      const snippet = document.createElement('p')
-      snippet.className = 'deepseek-result-snippet'
-      snippet.textContent = item.snippet
-      container.appendChild(snippet)
-    }
-
-    if (item.score !== undefined) {
-      const score = document.createElement('span')
-      score.className = 'deepseek-result-score'
-      score.textContent = `相似度：${Number(item.score).toFixed(3)}`
-      container.appendChild(score)
-    }
-
-    return container
-  }
-
-  function renderResults(results) {
-    const resultBox = getElement('deepseek-results')
-    const res = await queryOllama(searchText);  function renderResults(results) {
-    const resultBox = getElement('deepseek-results')
-    if (!resultBox) return
-
-    resultBox.textContent = ''
-
-    if (!Array.isArray(results) || results.length === 0) {
-      resultBox.textContent = '未找到匹配结果，请尝试更改查询词。'
-      return
-    }
-
-    const list = document.createElement('div')
-    list.className = 'deepseek-results-list'
-
-    results.forEach((item) => {
-      list.appendChild(renderResultItem(item))
-    })
-
-    resultBox.appendChild(list)
-  }  async function onSearch() {
-    const queryInput = getElement('deepseek-query')
-    if (!queryInput) return
-
-    const searchText = queryInput.value.trim()
-    if (!searchText) {
-      showStatus('请输入搜索关键字或问题后再查询。', true)
-      return
-    }
-
-    showStatus('正在查询本地模型，请稍候...', false)
-    renderResults([])
-
-    try {
-      const reply = useOllama ? await queryOllama(searchText) : await queryDeepseek(searchText)
-      const results = []
-
-      if (useOllama && reply.response) {
-        // Ollama 返回直接响应
-        results.push({
-          title: 'Ollama 分析结果',
-          snippet: reply.response
-        })
-      } else if (Array.isArray(reply.data)) {
-        reply.data.forEach((item) => {
-          results.push({
-            title: item.title || item.file_name || item.path || '',
-            path: item.url || item.path || item.file_path || '',
-            snippet: item.snippet || item.text || item.summary || '',
-            score: item.score || item.similarity || item.rank || '',
-          })
-        })
-      } else if (Array.isArray(reply.results)) {
-        reply.results.forEach((item) => {
-          results.push({
-            title: item.title || item.path || '',
-            path: item.url || item.path || '',
-            snippet: item.snippet || item.summary || item.text || '',
-            score: item.score || item.similarity || item.rank || '',
-          })
-        })
-      }
-
-      renderResults(results)
-      showStatus(`已返回 ${results.length} 条结果。`, false)
-    } catch (error) {
-      console.error(error)
-      showStatus(error.message || '查询失败，请检查 API 连接和配置。', true)
-    }
-  }
-    const formattedResults = [
-  {
-    title: 'Ollama 分析结果',
-    snippet: res.response
-  }
-];
-
-renderResults(formattedResults);
-
-    resultBox.innerHTML = ''
-
-    if (!Array.isArray(results) || results.length === 0) {
-      resultBox.textContent = '未找到匹配结果，请尝试更改查询词。'
-      return
-    }
-
-    const list = document.createElement('div')
-    list.className = 'deepseek-results-list'
-
-    results.forEach((item) => {
-      list.appendChild(renderResultItem(item))
-    })
-
-    resultBox.appendChild(list)
-  }
-
-  function showStatus(message, isError = false) {
-    const statusEl = getElement('deepseek-status')
-    if (!statusEl) return
-    statusEl.textContent = message
-    statusEl.style.color = isError ? '#c62828' : '#2e7d32'
+  function getScriptTag() {
+    return (
+      document.currentScript ||
+      document.querySelector('script[src$="deepseek-search.js"]')
+    );
   }
 
   function getApiKey() {
-    const script = document.currentScript || document.querySelector('script[src$="deepseek-search.js"]')
-    if (!script) return ''
-    return script.dataset.apiKey || ''
+    const script = getScriptTag();
+    if (!script) return "";
+    return (script.dataset.apiKey || "").trim();
   }
 
   function getApiHost() {
-    const script = document.currentScript || document.querySelector('script[src$="deepseek-search.js"]')
-    if (!script) return defaultApiHost
-
-    // 如果明确指定了 API host，使用指定的
-    if (script.dataset.apiHost) {
-      return script.dataset.apiHost
-    }
-
-    // 否则根据当前页面协议自动选择
-    if (window.location.protocol === 'https:') {
-      return publicApiHost
-    } else {
-      return defaultApiHost
-    }
+    const script = getScriptTag();
+    if (!script) return defaultApiHost;
+    return (script.dataset.apiHost || defaultApiHost).trim();
   }
 
-  async function queryOllama(query) {
-    const body = {
-      model: 'deepseek-r1:1.5b',  // 请根据你的 Ollama 模型名称修改
-      prompt: `以下是一个文档搜索查询。请基于这个查询找出相关的文档关键词和主题。\n\n查询：${query}\n\n相关关键词：`,
-      stream: false,
-    }
-
-    const response = await fetch(getApiHost(), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-      mode: 'cors',
-    })
-
-    if (!response.ok) {
-      const text = await response.text()
-      throw new Error(`Ollama 请求失败：${response.status} ${response.statusText} ${text}`)
-    }
-
-    return response.json()
+  function getModel() {
+    const script = getScriptTag();
+    if (!script) return defaultModel;
+    return (script.dataset.model || defaultModel).trim();
   }
 
-  async function queryDeepseek(query) {
-    const apiKey = getApiKey()
+  function renderResult(answerText) {
+    const resultBox = getElement("deepseek-results");
+    if (!resultBox) return;
+
+    resultBox.innerHTML = "";
+
+    if (!answerText) {
+      resultBox.textContent = "未获取到有效回答，请稍后重试。";
+      return;
+    }
+
+    const list = document.createElement("div");
+    list.className = "deepseek-results-list";
+
+    const item = document.createElement("div");
+    item.className = "deepseek-result-item";
+
+    const title = document.createElement("div");
+    title.className = "deepseek-result-title";
+    title.textContent = "DeepSeek 回答";
+
+    const snippet = document.createElement("p");
+    snippet.className = "deepseek-result-snippet";
+    snippet.textContent = answerText;
+
+    item.appendChild(title);
+    item.appendChild(snippet);
+    list.appendChild(item);
+    resultBox.appendChild(list);
+  }
+
+  function showStatus(message, isError) {
+    const statusEl = getElement("deepseek-status");
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.toggle("is-error", Boolean(isError));
+  }
+
+  function extractAnswerText(reply) {
+    if (
+      reply &&
+      Array.isArray(reply.choices) &&
+      reply.choices[0] &&
+      reply.choices[0].message
+    ) {
+      const content = reply.choices[0].message.content;
+      if (typeof content === "string") {
+        return content.trim();
+      }
+
+      // 兼容可能的数组结构内容
+      if (Array.isArray(content)) {
+        const texts = content
+          .map(function (part) {
+            if (typeof part === "string") return part;
+            if (part && typeof part.text === "string") return part.text;
+            return "";
+          })
+          .filter(Boolean);
+        return texts.join("\n").trim();
+      }
+    }
+
+    return "";
+  }
+
+  async function queryDeepSeek(userQuery) {
+    const apiKey = getApiKey();
     if (!apiKey) {
-      throw new Error('Deepseek API key 未设置，请在 script 标签中添加 data-api-key="YOUR_KEY"')
+      throw new Error(
+        "未配置 DeepSeek API Key，请在 script 标签设置 data-api-key。",
+      );
     }
 
     const body = {
-      query: query,
-      repository: defaultRepo,
-      top_k: defaultTopK,
-      filter: {
-        repo: defaultRepo,
-      },
-      client: 'static-frontend',
-      source: 'psydrugs.org',
-    }
+      model: getModel(),
+      messages: [
+        {
+          role: "system",
+          content:
+            "你是 psydrugs.org 的搜索助手。请直接回答用户问题，内容清晰、准确、简洁，并尽量给出可执行建议。",
+        },
+        {
+          role: "user",
+          content: userQuery,
+        },
+      ],
+      temperature: 0.2,
+      stream: false,
+    };
 
     const response = await fetch(getApiHost(), {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + apiKey,
       },
       body: JSON.stringify(body),
-      mode: 'cors',
-    })
+    });
 
     if (!response.ok) {
-      const text = await response.text()
-      throw new Error(`Deepseek 请求失败：${response.status} ${response.statusText} ${text}`)
+      const text = await response.text();
+      throw new Error(
+        "DeepSeek 请求失败：" +
+          response.status +
+          " " +
+          response.statusText +
+          " " +
+          text,
+      );
     }
 
-    return response.json()
+    return response.json();
   }
 
   async function onSearch() {
-    const queryInput = getElement('deepseek-query')
-    if (!queryInput) return
+    const queryInput = getElement("deepseek-query");
+    const button = getElement("deepseek-search-button");
+    if (!queryInput || !button) return;
 
-    const searchText = queryInput.value.trim()
-    if (!searchText) {
-      showStatus('请输入搜索关键字或问题后再查询。', true)
-      return
+    const question = queryInput.value.trim();
+    if (!question) {
+      showStatus("请输入搜索关键字或问题后再查询。", true);
+      return;
     }
 
-    showStatus('正在查询本地模型，请稍候...', false)
-    renderResults([])
+    button.disabled = true;
+    button.classList.add("is-loading");
+    showStatus("正在调用 DeepSeek，请稍候…", false);
 
     try {
-      const reply = useOllama ? await queryOllama(searchText) : await queryDeepseek(searchText)
-      const results = []
+      const reply = await queryDeepSeek(question);
+      const answer = extractAnswerText(reply);
+      renderResult(answer);
 
-      if (Array.isArray(reply.data)) {
-        reply.data.forEach((item) => {
-          results.push({
-            title: item.title || item.file_name || item.path || '',
-            path: item.url || item.path || item.file_path || '',
-            snippet: item.snippet || item.text || item.summary || '',
-            score: item.score || item.similarity || item.rank || '',
-          })
-        })
-      } else if (Array.isArray(reply.results)) {
-        reply.results.forEach((item) => {
-          results.push({
-            title: item.title || item.path || '',
-            path: item.url || item.path || '',
-            snippet: item.snippet || item.summary || item.text || '',
-            score: item.score || item.similarity || item.rank || '',
-          })
-        })
+      if (answer) {
+        showStatus("查询成功。", false);
+      } else {
+        showStatus("返回结果为空，请尝试换个问法。", true);
       }
-
-      renderResults(results)
-      showStatus(`已返回 ${results.length} 条结果。`, false)
     } catch (error) {
-      console.error(error)
-      showStatus(error.message || '查询失败，请检查 API 连接和配置。', true)
+      console.error("[deepseek-search] ", error);
+      showStatus(
+        error && error.message ? error.message : "查询失败，请检查 API 配置。",
+        true,
+      );
+    } finally {
+      button.disabled = false;
+      button.classList.remove("is-loading");
     }
   }
 
-  function attachSearchListeners() {
-    const button = getElement('deepseek-search-button')
-    const queryInput = getElement('deepseek-query')
-    if (!button || !queryInput) return
+  function attachListeners() {
+    const button = getElement("deepseek-search-button");
+    const queryInput = getElement("deepseek-query");
+    if (!button || !queryInput) return;
 
-    button.addEventListener('click', onSearch)
-    queryInput.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        onSearch()
+    button.addEventListener("click", onSearch);
+    queryInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        onSearch();
       }
-    })
+    });
   }
 
-  function applyDefaultStyles() {
-    const style = document.createElement('style')
+  function applyStyles() {
+    if (document.getElementById("deepseek-search-theme-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "deepseek-search-theme-style";
     style.textContent = `
-      .deepseek-results-list { margin: 0; padding: 0; }
-      .deepseek-result-item { padding: 14px 16px; border-bottom: 1px solid #e0e0e0; }
-      .deepseek-result-title { font-weight: 700; margin-bottom: 6px; }
-      .deepseek-result-path { display: block; color: #1e88e5; margin-bottom: 8px; text-decoration: none; }
-      .deepseek-result-path:hover { text-decoration: underline; }
-      .deepseek-result-snippet { margin: 0; color: #424242; }
-      .deepseek-result-score { display: inline-block; margin-top: 8px; font-size: 12px; color: #616161; }
-      #deepseek-status { margin-top: 10px; font-size: 14px; }
-    `
-    document.head.appendChild(style)
+      .deepseek-search-wrap {
+        --ds-bg: #f7f8fa;
+        --ds-card-bg: #ffffff;
+        --ds-border: #dfe3ea;
+        --ds-text: #1f2937;
+        --ds-muted: #4b5563;
+        --ds-primary: #2563eb;
+        --ds-primary-hover: #1d4ed8;
+        --ds-status-ok: #2e7d32;
+        --ds-status-err: #c62828;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .deepseek-search-wrap {
+          --ds-bg: #12151c;
+          --ds-card-bg: #1b2230;
+          --ds-border: #30394b;
+          --ds-text: #e5e7eb;
+          --ds-muted: #c7ced9;
+          --ds-primary: #3b82f6;
+          --ds-primary-hover: #60a5fa;
+          --ds-status-ok: #81c784;
+          --ds-status-err: #ef5350;
+        }
+      }
+
+      .deepseek-search-wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 20px;
+        color: var(--ds-text);
+      }
+
+      .deepseek-search-panel {
+        background: var(--ds-bg);
+        border: 1px solid var(--ds-border);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+
+      .deepseek-search-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      #deepseek-query {
+        flex: 1;
+        padding: 10px 12px;
+        border: 1px solid var(--ds-border);
+        border-radius: 8px;
+        background: var(--ds-card-bg);
+        color: var(--ds-text);
+        font-size: 14px;
+      }
+
+      #deepseek-query::placeholder {
+        color: var(--ds-muted);
+      }
+
+      #deepseek-search-button {
+        padding: 10px 18px;
+        background: var(--ds-primary);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      #deepseek-search-button:hover {
+        background: var(--ds-primary-hover);
+      }
+
+      #deepseek-search-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      #deepseek-status {
+        min-height: 20px;
+        font-size: 13px;
+        color: var(--ds-status-ok);
+      }
+
+      #deepseek-status.is-error {
+        color: var(--ds-status-err);
+      }
+
+      .deepseek-results-list {
+        border: 1px solid var(--ds-border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--ds-card-bg);
+      }
+
+      .deepseek-result-item {
+        padding: 14px 16px;
+      }
+
+      .deepseek-result-title {
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .deepseek-result-snippet {
+        margin: 0;
+        color: var(--ds-text);
+        white-space: pre-wrap;
+        line-height: 1.7;
+      }
+    `;
+    document.head.appendChild(style);
   }
 
   function init() {
-    attachSearchListeners()
-    applyDefaultStyles()
+    applyStyles();
+    attachListeners();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    init()
+    init();
   }
-})()
+})();

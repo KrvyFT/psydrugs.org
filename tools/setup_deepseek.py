@@ -22,7 +22,7 @@ def update_search_page_config(api_key: str, api_host: str = None) -> None:
         return
 
     content = search_page.read_text(encoding='utf-8')
-    
+
     # 替换 API key
     if api_key:
         content = re.sub(
@@ -30,7 +30,7 @@ def update_search_page_config(api_key: str, api_host: str = None) -> None:
             f'data-api-key="{api_key}"',
             content
         )
-    
+
     # 如果提供了自定义 API host，也替换
     if api_host:
         # 在脚本标签后面添加自定义 host
@@ -46,7 +46,7 @@ def update_search_page_config(api_key: str, api_host: str = None) -> None:
                 f'data-api-host="{api_host}"',
                 content
             )
-    
+
     search_page.write_text(content, encoding='utf-8')
     print(f"✓ 搜索页面已更新：{search_page}")
 
@@ -88,7 +88,7 @@ def main() -> None:
     parser.add_argument('--api-key', help='Deepseek API Key', required=False)
     parser.add_argument('--api-host', help='自定义 API 地址（可选）', required=False)
     parser.add_argument('--init', action='store_true', help='初始化配置文件')
-    
+
     args = parser.parse_args()
 
     if args.init:
