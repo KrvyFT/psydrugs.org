@@ -2,12 +2,13 @@
 title: AI 智能搜索
 date: 2026-05-03
 layout: page
+cover: https://gcore.jsdelivr.net/gh/cdn-x/xaoxuu@main/posts/20250706150531375.jpg
 ---
+# Deepseek-R1 智能搜索
 
 <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
   <div style="margin-bottom: 30px;">
-    <h2>Deepseek AI 智能搜索</h2>
-    <p>在全站内容中使用 AI 进行语义搜索。</p>
+    <h4>在全站内容中使用 AI 进行语义搜索。当前使用模型为：deepseek-r1:1.5b</h4>
   </div>
 
   <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -31,4 +32,4 @@ layout: page
   <div id="deepseek-results" style="min-height: 100px;"></div>
 </div>
 
-<script src="/js/deepseek-search.js" data-api-host="http://127.0.0.1:443/api/generate"></script>
+<script src="/js/deepseek-search.js" data-api-host="http://127.0.0.1:11434/api/generate"></script>

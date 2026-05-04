@@ -64,7 +64,7 @@ menubar:
       url: /recovery/
     - id: search
       theme: "#9C27B0"
-      icon: solar:magnifer-bold-duotone
+      icon: /icons/ai_search.png
       title: AI 搜索
       url: /search/
     # id: 页面中高亮的 menu_id

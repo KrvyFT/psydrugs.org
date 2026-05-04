@@ -1,10 +1,13 @@
 # Ollama 启动脚本 - PowerShell 版本
 
+# 设置 UTF-8 编码
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 Write-Host "Ollama 启动脚本" -ForegroundColor Green
 Write-Host "================" -ForegroundColor Green
 
 # 设置环境变量
-$env:OLLAMA_HOST = "127.0.0.1:443"
+$env:OLLAMA_HOST = "127.0.0.1:11434"
 $env:OLLAMA_ORIGINS = "*"
 
 Write-Host "环境变量已设置：" -ForegroundColor Yellow

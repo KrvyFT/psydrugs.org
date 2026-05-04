@@ -1,11 +1,14 @@
 @echo off
-REM Ollama 启动脚本 - 配置为本地 443 端口
+REM 设置 UTF-8 编码
+chcp 65001 > nul
+
+REM Ollama 启动脚本 - 配置为本地 11434 端口
 
 echo Ollama 启动脚本
 echo ================
 
 REM 设置环境变量
-set OLLAMA_HOST=127.0.0.1:443
+set OLLAMA_HOST=127.0.0.1:11434
 set OLLAMA_ORIGINS=*
 
 echo 环境变量已设置：
