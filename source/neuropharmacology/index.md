@@ -17,7 +17,14 @@ updated: 2026-05-27 18:30:00
 
 ### 神经递质相关
 
-[GABA与对应受体](/neuropharmacology/GABA)
+#### GABA能相关
+
+[苯二氮卓类解析](/neuropharmacology/BZDs)
+[Z类药物解析](/neuropharmacology/z-drugs)
+
+
+----------
+
 [血清素与受体](/neuropharmacology/5-HT)
 [多巴胺与动机](/neuropharmacology/dopamine)
 [肾上腺素与受体](/neuropharmacology/adrenalin)
